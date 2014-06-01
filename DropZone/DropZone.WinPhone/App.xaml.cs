@@ -10,6 +10,9 @@ using DropZone.WinPhone.Resources;
 
 namespace DropZone.WinPhone
 {
+    /// <summary>
+    /// The skydive dropzone wp8 application.
+    /// </summary>
     public partial class App : Application
     {
         /// <summary>
@@ -59,24 +62,28 @@ namespace DropZone.WinPhone
 
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
         }
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
         }
 
         // Code to execute when the application is deactivated (sent to background)
         // This code will not execute when the application is closing
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
         // This code will not execute when the application is deactivated
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
         }
@@ -181,6 +188,7 @@ namespace DropZone.WinPhone
         //
         // For more info on localizing Windows Phone apps see http://go.microsoft.com/fwlink/?LinkId=262072.
         //
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         private void InitializeLanguage()
         {
             try

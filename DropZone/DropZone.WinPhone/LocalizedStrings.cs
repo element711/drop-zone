@@ -9,6 +9,13 @@ namespace DropZone.WinPhone
     {
         private static AppResources _localizedResources = new AppResources();
 
-        public AppResources LocalizedResources { get { return _localizedResources; } }
+        /// <summary>
+        /// Gets the localized resources.
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public AppResources LocalizedResources
+        {
+            get { return _localizedResources; }
+        }
     }
 }
