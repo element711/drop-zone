@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 					   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-					   x:Class="DropZone.Views.LogEntry"
+					   x:Class="DropZone.Views.Jump"
              Title="Add Jump">
   <ScrollView>
     <Grid>
@@ -24,7 +24,7 @@
       </Grid.ColumnDefinitions>
 
       <Entry Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Keyboard="Keyboard.Numeric" Placeholder="JumpNumber" Text="{Binding JumpNumber}" HorizontalOptions="LayoutOptions.Fill" VerticalOptions="LayoutOptions.Fill"/>
-      <DatePicker Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Date="{Binding Date}" />
+      <DatePicker Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Date="{Binding JumpDate}" />
       <Entry Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Placeholder="Location" Text="{Binding Location}" />
       <Entry Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Placeholder="Aircraft" Text="{Binding Aircraft}" />
       <Entry Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Keyboard="Keyboard.Numeric" Placeholder="Altitude (ft)" Text="{Binding Altitude}" />

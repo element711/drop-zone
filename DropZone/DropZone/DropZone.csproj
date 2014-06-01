@@ -53,13 +53,17 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="App.cs" />
-    <Compile Include="Domain\LogEntry.cs" />
+    <Compile Include="Models\IJump.cs" />
+    <Compile Include="Models\Jump.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\LogEntryViewModel.cs" />
-    <Compile Include="Views\LogEntry.xaml.cs">
-      <DependentUpon>LogEntry.xaml</DependentUpon>
+    <Compile Include="Repository\FakeRepository.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="ViewModels\JumpViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\Jump.xaml.cs">
+      <DependentUpon>Jump.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
@@ -77,7 +81,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\LogEntry.xaml">
+    <EmbeddedResource Include="Views\Jump.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

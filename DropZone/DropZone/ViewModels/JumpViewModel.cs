@@ -1,17 +1,19 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using DropZone.Annotations;
+using DropZone.Models;
 
 namespace DropZone.ViewModels
 {
     /// <summary>
-    /// The log entry view model.
+    /// The jump view model.
     /// </summary>
-    public class LogEntryViewModel : INotifyPropertyChanged
+    public class JumpViewModel : INotifyPropertyChanged
     {
         private string _jumpNumber;
-        private DateTime _date;
+        private DateTime _jumpDate;
         private string _location;
         private string _aircraft;
         private string _altitude;
@@ -27,13 +29,31 @@ namespace DropZone.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LogEntryViewModel"/> class.
+        /// Initializes a new instance of the <see cref="JumpViewModel"/> class.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public LogEntryViewModel()
+        public JumpViewModel()
         {
-            Location = "Parakai";
-            _date = DateTime.Now;
+            _jumpDate = DateTime.Now;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JumpViewModel"/> class.
+        /// </summary>
+        public JumpViewModel([NotNull] IJump jump)
+        {
+            if (jump == null) throw new ArgumentNullException("jump");
+
+            _aircraft = jump.Aircraft;
+            _altitude = jump.Altitude.ToString(CultureInfo.CurrentCulture);
+            _container = jump.Container;
+            _jumpDate  = jump.JumpDate;
+            _description = jump.Description;
+            _freefallDelay = jump.FreefallDelay.ToString(CultureInfo.CurrentCulture);
+            _jumpNumber = jump.JumpNumber.ToString(CultureInfo.CurrentCulture);
+            _location = jump.Location;
+            _manoeuvre = jump.Manoeuvre;
+            _totalTime = jump.TotalTime.ToString(CultureInfo.CurrentCulture);
         }
 
         /// <summary>
@@ -59,16 +79,16 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Gets or sets the date of the jump.
         /// </summary>
-        public DateTime Date
+        public DateTime JumpDate
         {
-            get { return _date; }
+            get { return _jumpDate; }
             set
             {
-                if (value.Equals(_date))
+                if (value.Equals(_jumpDate))
                 {
                     return;
                 }
-                _date = value;
+                _jumpDate = value;
                 OnPropertyChanged();
             }
         }

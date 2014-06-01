@@ -1,4 +1,5 @@
-﻿using DropZone.ViewModels;
+﻿using System;
+using DropZone.ViewModels;
 using DropZone.Views;
 using Xamarin.Forms;
 
@@ -15,20 +16,33 @@ namespace DropZone
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public static Page GetMainPage()
         {
-            return new NavigationPage(new Main());
+            MainViewModel viewModel = new MainViewModel();
+            Main mainPage = new Main { BindingContext = viewModel };
+            mainPage.Appearing += mainPage_Appearing;
+            return new NavigationPage(mainPage);
+        }
+
+        private static async void mainPage_Appearing(object sender, EventArgs e)
+        {
+            Main view = ((Main) sender);
+            MainViewModel viewModel = ((MainViewModel) (view.BindingContext));
+
+            view.IsBusy = true;
+            await viewModel.OnLoad();
+            view.IsBusy = false;
         }
 
         /// <summary>
-        /// Gets the log entry page.
+        /// Gets the add jump page.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
-        public static Page GetLogEntryPage()
+        public static Page GetJumpPage()
         {
-            LogEntry logEntry = new LogEntry
+            Jump jump = new Jump
             {
-                BindingContext = new LogEntryViewModel()
+                BindingContext = new JumpViewModel()
             };
-            return logEntry;
+            return jump;
         }
     }
 }

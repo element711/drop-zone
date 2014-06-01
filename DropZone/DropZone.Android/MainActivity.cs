@@ -1,5 +1,7 @@
-﻿using Android.App;
+﻿using System.Threading.Tasks;
+using Android.App;
 using Android.OS;
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 namespace DropZone.Droid
@@ -17,9 +19,10 @@ namespace DropZone.Droid
         {
             base.OnCreate(bundle);
 
-            Xamarin.Forms.Forms.Init(this, bundle);
+            Forms.Init(this, bundle);
 
-            SetPage(App.GetMainPage());
+            Page mainPage = App.GetMainPage();
+            SetPage(mainPage);
         }
     }
 }

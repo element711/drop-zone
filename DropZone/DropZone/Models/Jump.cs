@@ -1,15 +1,15 @@
 ﻿using System;
 using DropZone.Annotations;
 
-namespace DropZone.Domain
+namespace DropZone.Models
 {
     /// <summary>
-    /// Represents a log entry.
+    /// Represents a jump log entry.
     /// </summary>
-    public class LogEntry
+    public class Jump : IJump
     {
         private readonly uint _jumpNumber;
-        private readonly DateTime _date;
+        private readonly DateTime _jumpDate;
         private readonly string _location;
         private readonly string _aircraft;
         private readonly uint _altitude;
@@ -20,9 +20,9 @@ namespace DropZone.Domain
         private readonly string _description;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LogEntry"/> class.
+        /// Initializes a new instance of the <see cref="Jump"/> class.
         /// </summary>
-        public LogEntry(uint jumpNumber, DateTime date, [NotNull] string location, [NotNull] string aircraft, uint altitude,
+        public Jump(uint jumpNumber, DateTime jumpDate, [NotNull] string location, [NotNull] string aircraft, uint altitude,
             [NotNull] string manoeuvre, uint freefallDelay, uint totalTime, [NotNull] string container,
             [NotNull] string description)
         {
@@ -33,7 +33,7 @@ namespace DropZone.Domain
             if (description == null) throw new ArgumentNullException("description");
 
             _jumpNumber = jumpNumber;
-            _date = date;
+            _jumpDate = jumpDate;
             _location = location;
             _aircraft = aircraft;
             _altitude = altitude;
@@ -55,9 +55,9 @@ namespace DropZone.Domain
         /// <summary>
         /// Gets the date of the jump.
         /// </summary>
-        public DateTime Date
+        public DateTime JumpDate
         {
-            get { return _date; }
+            get { return _jumpDate; }
         }
 
         /// <summary>

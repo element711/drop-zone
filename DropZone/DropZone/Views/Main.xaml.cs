@@ -1,5 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace DropZone.Views
 {
@@ -14,14 +13,12 @@ namespace DropZone.Views
         public Main()
         {
             InitializeComponent();
+            ToolbarItems.Add(new ToolbarItem("Add Jump", string.Empty, AddJump));
         }
 
-        /// <summary>
-        /// Called when add entry button is clicked.
-        /// </summary>
-        public async void OnButtonClicked(object sender, EventArgs args)
+        private void AddJump()
         {
-            await Navigation.PushAsync(App.GetLogEntryPage());
+            Navigation.PushAsync(App.GetJumpPage());
         }
     }
 }

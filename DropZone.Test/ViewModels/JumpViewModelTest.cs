@@ -3,7 +3,7 @@
 namespace DropZone.Test.ViewModels
 {
     [TestFixture]
-    public class LogEntryViewModelTest
+    public class JumpViewModelTest
     {
     }
 }
