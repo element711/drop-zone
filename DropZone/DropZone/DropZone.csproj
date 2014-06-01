@@ -79,7 +79,6 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\CodeAnalaysisDictionary.xml">
       <Link>CodeAnalaysisDictionary.xml</Link>

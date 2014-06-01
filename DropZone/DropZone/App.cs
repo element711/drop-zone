@@ -19,7 +19,7 @@ namespace DropZone
             {
                 BindingContext = new LogEntryViewModel()
             };
-            return logEntry;
+            return new NavigationPage(logEntry);
         }
     }
 }
