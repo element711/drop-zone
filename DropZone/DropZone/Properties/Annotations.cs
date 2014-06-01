@@ -391,7 +391,7 @@ namespace DropZone.Annotations
   /// within a web project. Path can be relative or absolute,
   /// starting from web root (~)
   /// </summary>
-  [AttributeUsage(AttributeTargets.Parameter)]
+  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes"), AttributeUsage(AttributeTargets.Parameter)]
   public class PathReferenceAttribute : Attribute
   {
     public PathReferenceAttribute() { }
@@ -405,39 +405,45 @@ namespace DropZone.Annotations
 
   // ASP.NET MVC attributes
 
-  [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments"), AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
   public sealed class AspMvcAreaMasterLocationFormatAttribute : Attribute
   {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "format")]
     public AspMvcAreaMasterLocationFormatAttribute(string format) { }
   }
 
-  [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments"), AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
   public sealed class AspMvcAreaPartialViewLocationFormatAttribute : Attribute
   {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "format")]
     public AspMvcAreaPartialViewLocationFormatAttribute(string format) { }
   }
 
-  [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments"), AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
   public sealed class AspMvcAreaViewLocationFormatAttribute : Attribute
   {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "format")]
     public AspMvcAreaViewLocationFormatAttribute(string format) { }
   }
 
-  [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments"), AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
   public sealed class AspMvcMasterLocationFormatAttribute : Attribute
   {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "format")]
     public AspMvcMasterLocationFormatAttribute(string format) { }
   }
 
-  [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments"), AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
   public sealed class AspMvcPartialViewLocationFormatAttribute : Attribute
   {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "format")]
     public AspMvcPartialViewLocationFormatAttribute(string format) { }
   }
 
-  [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments"), AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
   public sealed class AspMvcViewLocationFormatAttribute : Attribute
   {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "format")]
     public AspMvcViewLocationFormatAttribute(string format) { }
   }
   
@@ -525,7 +531,7 @@ namespace DropZone.Annotations
   /// ASP.NET MVC attribute. Allows disabling all inspections
   /// for MVC views within a class or a method.
   /// </summary>
-  [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Supress"), AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
   public sealed class AspMvcSupressViewErrorAttribute : Attribute { }
 
   /// <summary>

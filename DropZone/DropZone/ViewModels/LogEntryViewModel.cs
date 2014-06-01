@@ -63,11 +63,14 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Gets or sets the location of the jump.
         /// </summary>
+        [NotNull]
         public string Location
         {
             get { return _location; }
             set
             {
+                if (value == null) throw new ArgumentNullException("value");
+
                 if (value.Equals(_location, StringComparison.Ordinal))
                 {
                     return;
@@ -80,11 +83,14 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Gets or sets the name of the aircraft.
         /// </summary>
+        [NotNull]
         public string Aircraft
         {
             get { return _aircraft; }
             set
             {
+                if (value == null) throw new ArgumentNullException("value");
+
                 if (value.Equals(_aircraft, StringComparison.Ordinal))
                 {
                     return;
@@ -114,11 +120,14 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Gets or sets the manoeuvre performed.
         /// </summary>
+        [NotNull]
         public string Manoeuvre
         {
             get { return _manoeuvre; }
             set
             {
+                if (value == null) throw new ArgumentNullException("value");
+
                 if (value.Equals(_manoeuvre, StringComparison.Ordinal))
                 {
                     return;
@@ -165,11 +174,14 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Gets or sets the container.
         /// </summary>
+        [NotNull]
         public string Container
         {
             get { return _container; }
             set
             {
+                if (value == null) throw new ArgumentNullException("value");
+
                 if (value.Equals(_container, StringComparison.Ordinal))
                 {
                     return;
@@ -182,11 +194,14 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Gets or sets the description.
         /// </summary>
+        [NotNull]
         public string Description
         {
             get { return _description; }
             set
             {
+                if (value == null) throw new ArgumentNullException("value");
+
                 if (value.Equals(_description, StringComparison.Ordinal))
                 {
                     return;
