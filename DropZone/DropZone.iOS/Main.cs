@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+﻿using MonoTouch.UIKit;
 
 namespace DropZone.iOS
 {
+    /// <summary>
+    /// The skydive dropzone iOS application.
+    /// </summary>
     public class Application
     {
         // This is the main entry point of the application.
