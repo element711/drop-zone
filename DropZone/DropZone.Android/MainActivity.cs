@@ -1,6 +1,5 @@
 ﻿using Android.App;
 using Android.OS;
-
 using Xamarin.Forms.Platform.Android;
 
 namespace DropZone.Droid

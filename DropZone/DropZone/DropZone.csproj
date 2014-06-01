@@ -53,6 +53,7 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="App.cs" />
+    <Compile Include="Domain\LogEntry.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,9 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Domain\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\CodeAnalaysisDictionary.xml">
       <Link>CodeAnalaysisDictionary.xml</Link>

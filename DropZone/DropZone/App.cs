@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using DropZone.ViewModels;
+using DropZone.Views;
+using Xamarin.Forms;
 
 namespace DropZone
 {
@@ -10,18 +12,14 @@ namespace DropZone
         /// <summary>
         /// Gets the main page which will be displayed across all devices.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Xamarin.Forms.Label.set_Text(System.String)")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public static Page GetMainPage()
         {
-            return new ContentPage
+            LogEntry logEntry = new LogEntry
             {
-                Content = new Label
-                {
-                    Text = "Hello, Forms !",
-                    VerticalOptions = LayoutOptions.CenterAndExpand,
-                    HorizontalOptions = LayoutOptions.CenterAndExpand,
-                },
+                BindingContext = new LogEntryViewModel()
             };
+            return logEntry;
         }
     }
 }

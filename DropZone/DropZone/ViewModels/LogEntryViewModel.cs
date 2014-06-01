@@ -10,14 +10,14 @@ namespace DropZone.ViewModels
     /// </summary>
     public class LogEntryViewModel : INotifyPropertyChanged
     {
-        private uint _jumpNumber;
+        private string _jumpNumber;
         private DateTime _date;
         private string _location;
         private string _aircraft;
-        private uint _altitude;
+        private string _altitude;
         private string _manoeuvre;
-        private uint _freefallDelay;
-        private uint _totalTime;
+        private string _freefallDelay;
+        private string _totalTime;
         private string _container;
         private string _description;
 
@@ -27,9 +27,19 @@ namespace DropZone.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="LogEntryViewModel"/> class.
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public LogEntryViewModel()
+        {
+            Location = "Parakai";
+            _date = DateTime.Now;
+        }
+
+        /// <summary>
         /// Gets or sets the jump number.
         /// </summary>
-        public uint JumpNumber
+        public string JumpNumber
         {
             get { return _jumpNumber; }
             set
@@ -103,7 +113,7 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Gets or sets the altitude of the jump.
         /// </summary>
-        public uint Altitude
+        public string Altitude
         {
             get { return _altitude; }
             set
@@ -140,7 +150,7 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Gets or sets the freefall delay.
         /// </summary>
-        public uint FreefallDelay
+        public string FreefallDelay
         {
             get { return _freefallDelay; }
             set
@@ -157,7 +167,7 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Gets or sets the total time.
         /// </summary>
-        public uint TotalTime
+        public string TotalTime
         {
             get { return _totalTime; }
             set
