@@ -39,11 +39,14 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Gets or sets the jump number.
         /// </summary>
+        [NotNull]
         public string JumpNumber
         {
             get { return _jumpNumber; }
             set
             {
+                if (value == null) throw new ArgumentNullException("value");
+
                 if (value.Equals(_jumpNumber))
                 {
                     return;
@@ -113,11 +116,14 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Gets or sets the altitude of the jump.
         /// </summary>
+        [NotNull]
         public string Altitude
         {
             get { return _altitude; }
             set
             {
+                if (value == null) throw new ArgumentNullException("value");
+
                 if (value.Equals(_altitude))
                 {
                     return;
@@ -150,11 +156,14 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Gets or sets the freefall delay.
         /// </summary>
+        [NotNull]
         public string FreefallDelay
         {
             get { return _freefallDelay; }
             set
             {
+                if (value == null) throw new ArgumentNullException("value");
+
                 if (value.Equals(_freefallDelay))
                 {
                     return;
@@ -167,11 +176,14 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Gets or sets the total time.
         /// </summary>
+        [NotNull]
         public string TotalTime
         {
             get { return _totalTime; }
             set
             {
+                if (value == null) throw new ArgumentNullException("value");
+
                 if (value.Equals(_totalTime))
                 {
                     return;
