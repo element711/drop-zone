@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Android.App;
+﻿using Android.App;
 using Android.OS;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
@@ -9,7 +8,7 @@ namespace DropZone.Droid
     /// <summary>
     /// Main activity.
     /// </summary>
-    [Activity(Label = "DropZone", MainLauncher = true)]
+    [Activity(Label = "DropZone", MainLauncher = true, Icon = "@drawable/ParachuteIcon")] // Theme = "@android:style/Theme.Holo.Light"
     public class MainActivity : AndroidActivity
     {
         /// <summary>
@@ -20,7 +19,7 @@ namespace DropZone.Droid
             base.OnCreate(bundle);
 
             Forms.Init(this, bundle);
-
+            
             Page mainPage = App.GetMainPage();
             SetPage(mainPage);
         }

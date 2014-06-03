@@ -8,7 +8,7 @@ namespace DropZone.Models
     /// </summary>
     public class Jump : IJump
     {
-        private readonly uint _jumpNumber;
+        private readonly string _jumpNumber;
         private readonly DateTime _jumpDate;
         private readonly string _location;
         private readonly string _aircraft;
@@ -18,19 +18,22 @@ namespace DropZone.Models
         private readonly uint _totalTime;
         private readonly string _container;
         private readonly string _description;
+        private readonly Uri _thumbnailImage;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Jump"/> class.
         /// </summary>
-        public Jump(uint jumpNumber, DateTime jumpDate, [NotNull] string location, [NotNull] string aircraft, uint altitude,
+        public Jump([NotNull] string jumpNumber, DateTime jumpDate, [NotNull] string location, [NotNull] string aircraft, uint altitude,
             [NotNull] string manoeuvre, uint freefallDelay, uint totalTime, [NotNull] string container,
-            [NotNull] string description)
+            [NotNull] string description, [NotNull] Uri thumbnailImage)
         {
+            if (jumpNumber == null) throw new ArgumentNullException("jumpNumber");
             if (location == null) throw new ArgumentNullException("location");
             if (aircraft == null) throw new ArgumentNullException("aircraft");
             if (manoeuvre == null) throw new ArgumentNullException("manoeuvre");
             if (container == null) throw new ArgumentNullException("container");
             if (description == null) throw new ArgumentNullException("description");
+            if (thumbnailImage == null) throw new ArgumentNullException("thumbnailImage");
 
             _jumpNumber = jumpNumber;
             _jumpDate = jumpDate;
@@ -42,12 +45,13 @@ namespace DropZone.Models
             _totalTime = totalTime;
             _container = container;
             _description = description;
+            _thumbnailImage = thumbnailImage;
         }
 
         /// <summary>
         /// Gets the jump number.
         /// </summary>
-        public uint JumpNumber
+        public string JumpNumber
         {
             get { return _jumpNumber; }
         }
@@ -122,6 +126,14 @@ namespace DropZone.Models
         public string Description
         {
             get { return _description; }
+        }
+
+        /// <summary>
+        /// Gets the thumbnail image.
+        /// </summary>
+        public Uri ThumbnailImage
+        {
+            get { return _thumbnailImage; }
         }
     }
 }

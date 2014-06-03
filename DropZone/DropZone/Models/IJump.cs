@@ -10,7 +10,7 @@ namespace DropZone.Models
         /// <summary>
         /// Gets the jump number.
         /// </summary>
-        uint JumpNumber { get; }
+        string JumpNumber { get; }
 
         /// <summary>
         /// Gets the date of the jump.
@@ -56,5 +56,10 @@ namespace DropZone.Models
         /// Gets the description of the jump.
         /// </summary>
         string Description { get; }
+
+        /// <summary>
+        /// Gets the thumbnail image.
+        /// </summary>
+        Uri ThumbnailImage { get; }
     }
 }

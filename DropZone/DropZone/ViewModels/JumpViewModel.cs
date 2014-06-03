@@ -22,6 +22,7 @@ namespace DropZone.ViewModels
         private string _totalTime;
         private string _container;
         private string _description;
+        private Uri _thumbnailImage;
 
         /// <summary>
         /// Occurs when a property value changes.
@@ -50,10 +51,11 @@ namespace DropZone.ViewModels
             _jumpDate  = jump.JumpDate;
             _description = jump.Description;
             _freefallDelay = jump.FreefallDelay.ToString(CultureInfo.CurrentCulture);
-            _jumpNumber = jump.JumpNumber.ToString(CultureInfo.CurrentCulture);
+            _jumpNumber = jump.JumpNumber;
             _location = jump.Location;
             _manoeuvre = jump.Manoeuvre;
             _totalTime = jump.TotalTime.ToString(CultureInfo.CurrentCulture);
+            _thumbnailImage = jump.ThumbnailImage;
         }
 
         /// <summary>
@@ -249,6 +251,21 @@ namespace DropZone.ViewModels
                     return;
                 }
                 _description = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the image.
+        /// </summary>
+        [NotNull]
+        public Uri ThumbnailImage
+        {
+            get { return _thumbnailImage; }
+            set
+            {
+                if (value == null) throw new ArgumentNullException("value");
+                _thumbnailImage = value;
                 OnPropertyChanged();
             }
         }

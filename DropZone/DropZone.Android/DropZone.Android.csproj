@@ -92,6 +92,7 @@
     <AndroidResource Include="Resources\Drawable\Icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\ParachuteIcon.png" />
     <Content Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>

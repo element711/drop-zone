@@ -1,5 +1,4 @@
-﻿using System;
-using DropZone.ViewModels;
+﻿using DropZone.ViewModels;
 using DropZone.Views;
 using Xamarin.Forms;
 
@@ -17,21 +16,12 @@ namespace DropZone
         public static Page GetMainPage()
         {
             MainViewModel viewModel = new MainViewModel();
-            Main mainPage = new Main { BindingContext = viewModel };
-            mainPage.Appearing += mainPage_Appearing;
-            return new NavigationPage(mainPage);
+            MainPage mainPage = new MainPage(viewModel);
+            NavigationPage navigationPage = new NavigationPage(mainPage);
+            
+            return navigationPage;
         }
-
-        private static async void mainPage_Appearing(object sender, EventArgs e)
-        {
-            Main view = ((Main) sender);
-            MainViewModel viewModel = ((MainViewModel) (view.BindingContext));
-
-            view.IsBusy = true;
-            await viewModel.OnLoad();
-            view.IsBusy = false;
-        }
-
+        
         /// <summary>
         /// Gets the add jump page.
         /// </summary>
