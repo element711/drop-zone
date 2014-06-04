@@ -1,4 +1,5 @@
-﻿using DropZone.ViewModels;
+﻿using DropZone.Repository;
+using DropZone.ViewModels;
 using DropZone.Views;
 using Xamarin.Forms;
 
@@ -9,30 +10,32 @@ namespace DropZone
     /// </summary>
     public class App
     {
+        private static FakeRepository Repository
+        {
+            get { return new FakeRepository(); }
+        }
+
         /// <summary>
         /// Gets the main page which will be displayed across all devices.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public static Page GetMainPage()
         {
-            MainViewModel viewModel = new MainViewModel();
+            MainViewModel viewModel = new MainViewModel(Repository);
             MainPage mainPage = new MainPage(viewModel);
             NavigationPage navigationPage = new NavigationPage(mainPage);
             
             return navigationPage;
         }
-        
+
         /// <summary>
         /// Gets the add jump page.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public static Page GetJumpPage()
         {
-            Jump jump = new Jump
-            {
-                BindingContext = new JumpViewModel()
-            };
-            return jump;
+            JumpViewModel newJump = new JumpViewModel();
+            return new JumpPage(newJump);
         }
     }
 }

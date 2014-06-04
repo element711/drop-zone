@@ -14,7 +14,7 @@ namespace DropZone.ViewModels
     /// </summary>
     public class MainViewModel : INotifyPropertyChanged
     {
-        private readonly FakeRepository _repository;
+        private readonly IRepository _repository;
         private IEnumerable<JumpViewModel> _jumps;
 
         /// <summary>
@@ -25,10 +25,11 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="MainViewModel"/> class.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MainViewModel()
+        public MainViewModel([NotNull] IRepository repository)
         {
-            _repository = new FakeRepository();
+            if (repository == null) throw new ArgumentNullException("repository");
+
+            _repository = repository;
             _jumps = new List<JumpViewModel>();
         }
 
@@ -41,7 +42,7 @@ namespace DropZone.ViewModels
             List<JumpViewModel> jumpViewModels = new List<JumpViewModel>();
             foreach (IJump jump in jumps)
             {
-                jumpViewModels.Add(new JumpViewModel(jump));
+                jumpViewModels.Add(new JumpViewModel(jump, _repository));
             }
             Jumps = jumpViewModels;
         }

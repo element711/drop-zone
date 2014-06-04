@@ -10,56 +10,56 @@ namespace DropZone.Models
         /// <summary>
         /// Gets the jump number.
         /// </summary>
-        string JumpNumber { get; }
+        string JumpNumber { get; set; }
 
         /// <summary>
         /// Gets the date of the jump.
         /// </summary>
-        DateTime JumpDate { get; }
+        DateTime JumpDate { get; set; }
 
         /// <summary>
         /// Gets the location of the jump.
         /// </summary>
-        string Location { get; }
+        string Location { get; set; }
 
         /// <summary>
         /// Gets the aircraft the jump was performed out of.
         /// </summary>
-        string Aircraft { get; }
+        string Aircraft { get; set; }
 
         /// <summary>
         /// Gets the altitude of the jump.
         /// </summary>
-        uint Altitude { get; }
+        int Altitude { get; set; }
 
         /// <summary>
         /// Gets the manoeuvre performed during the jump.
         /// </summary>
-        string Manoeuvre { get; }
+        string Manoeuvre { get; set; }
 
         /// <summary>
         /// Gets the freefall delay of the jump.
         /// </summary>
-        uint FreefallDelay { get; }
+        int FreefallDelay { get; set; }
 
         /// <summary>
         /// Gets the total time of the jump in seconds.
         /// </summary>
-        uint TotalTime { get; }
+        int TotalTime { get; set; }
 
         /// <summary>
         /// Gets the container used for the jump.
         /// </summary>
-        string Container { get; }
+        string Container { get; set; }
 
         /// <summary>
         /// Gets the description of the jump.
         /// </summary>
-        string Description { get; }
+        string Description { get; set; }
 
         /// <summary>
         /// Gets the thumbnail image.
         /// </summary>
-        Uri ThumbnailImage { get; }
+        Uri ThumbnailImage { get; set; }
     }
 }

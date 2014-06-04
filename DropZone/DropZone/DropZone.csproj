@@ -62,9 +62,7 @@
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="ViewModels\JumpViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="Views\Jump.xaml.cs">
-      <DependentUpon>Jump.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Views\JumpPage.cs" />
     <Compile Include="Views\JumpCell.cs" />
     <Compile Include="Views\MainPage.cs" />
   </ItemGroup>
@@ -78,12 +76,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\Jump.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\CodeAnalaysisDictionary.xml">

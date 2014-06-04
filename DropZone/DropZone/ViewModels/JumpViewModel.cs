@@ -2,8 +2,10 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using DropZone.Annotations;
 using DropZone.Models;
+using DropZone.Repository;
 
 namespace DropZone.ViewModels
 {
@@ -12,17 +14,8 @@ namespace DropZone.ViewModels
     /// </summary>
     public class JumpViewModel : INotifyPropertyChanged
     {
-        private string _jumpNumber;
-        private DateTime _jumpDate;
-        private string _location;
-        private string _aircraft;
-        private string _altitude;
-        private string _manoeuvre;
-        private string _freefallDelay;
-        private string _totalTime;
-        private string _container;
-        private string _description;
-        private Uri _thumbnailImage;
+        private readonly IRepository _repository;
+        private readonly IJump _jump;
 
         /// <summary>
         /// Occurs when a property value changes.
@@ -35,27 +28,19 @@ namespace DropZone.ViewModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public JumpViewModel()
         {
-            _jumpDate = DateTime.Now;
+            _jump = new Jump();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JumpViewModel"/> class.
         /// </summary>
-        public JumpViewModel([NotNull] IJump jump)
+        public JumpViewModel([NotNull] IJump jump, [NotNull] IRepository repository)
         {
             if (jump == null) throw new ArgumentNullException("jump");
+            if (repository == null) throw new ArgumentNullException("repository");
 
-            _aircraft = jump.Aircraft;
-            _altitude = jump.Altitude.ToString(CultureInfo.CurrentCulture);
-            _container = jump.Container;
-            _jumpDate  = jump.JumpDate;
-            _description = jump.Description;
-            _freefallDelay = jump.FreefallDelay.ToString(CultureInfo.CurrentCulture);
-            _jumpNumber = jump.JumpNumber;
-            _location = jump.Location;
-            _manoeuvre = jump.Manoeuvre;
-            _totalTime = jump.TotalTime.ToString(CultureInfo.CurrentCulture);
-            _thumbnailImage = jump.ThumbnailImage;
+            _jump = jump;
+            _repository = repository;
         }
 
         /// <summary>
@@ -64,16 +49,16 @@ namespace DropZone.ViewModels
         [NotNull]
         public string JumpNumber
         {
-            get { return _jumpNumber; }
+            get { return _jump.JumpNumber; }
             set
             {
                 if (value == null) throw new ArgumentNullException("value");
 
-                if (value.Equals(_jumpNumber))
+                if (value.Equals(_jump.JumpNumber))
                 {
                     return;
                 }
-                _jumpNumber = value;
+                _jump.JumpNumber = value;
                 OnPropertyChanged();
             }
         }
@@ -83,14 +68,14 @@ namespace DropZone.ViewModels
         /// </summary>
         public DateTime JumpDate
         {
-            get { return _jumpDate; }
+            get { return _jump.JumpDate; }
             set
             {
-                if (value.Equals(_jumpDate))
+                if (value.Equals(_jump.JumpDate))
                 {
                     return;
                 }
-                _jumpDate = value;
+                _jump.JumpDate = value;
                 OnPropertyChanged();
             }
         }
@@ -101,16 +86,16 @@ namespace DropZone.ViewModels
         [NotNull]
         public string Location
         {
-            get { return _location; }
+            get { return _jump.Location; }
             set
             {
                 if (value == null) throw new ArgumentNullException("value");
 
-                if (value.Equals(_location, StringComparison.Ordinal))
+                if (value.Equals(_jump.Location, StringComparison.Ordinal))
                 {
                     return;
                 }
-                _location = value;
+                _jump.Location = value;
                 OnPropertyChanged();
             }
         }
@@ -121,16 +106,16 @@ namespace DropZone.ViewModels
         [NotNull]
         public string Aircraft
         {
-            get { return _aircraft; }
+            get { return _jump.Aircraft; }
             set
             {
                 if (value == null) throw new ArgumentNullException("value");
 
-                if (value.Equals(_aircraft, StringComparison.Ordinal))
+                if (value.Equals(_jump.Aircraft, StringComparison.Ordinal))
                 {
                     return;
                 }
-                _aircraft = value;
+                _jump.Aircraft = value;
                 OnPropertyChanged();
             }
         }
@@ -138,19 +123,12 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Gets or sets the altitude of the jump.
         /// </summary>
-        [NotNull]
         public string Altitude
         {
-            get { return _altitude; }
+            get { return _jump.Altitude == 0 ? string.Empty : _jump.Altitude.ToString(CultureInfo.CurrentCulture); }
             set
             {
-                if (value == null) throw new ArgumentNullException("value");
-
-                if (value.Equals(_altitude))
-                {
-                    return;
-                }
-                _altitude = value;
+                _jump.Altitude = string.IsNullOrEmpty(value) ? 0 : int.Parse(value, CultureInfo.CurrentCulture);
                 OnPropertyChanged();
             }
         }
@@ -161,16 +139,16 @@ namespace DropZone.ViewModels
         [NotNull]
         public string Manoeuvre
         {
-            get { return _manoeuvre; }
+            get { return _jump.Manoeuvre; }
             set
             {
                 if (value == null) throw new ArgumentNullException("value");
 
-                if (value.Equals(_manoeuvre, StringComparison.Ordinal))
+                if (value.Equals(_jump.Manoeuvre, StringComparison.Ordinal))
                 {
                     return;
                 }
-                _manoeuvre = value;
+                _jump.Manoeuvre = value;
                 OnPropertyChanged();
             }
         }
@@ -178,19 +156,12 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Gets or sets the freefall delay.
         /// </summary>
-        [NotNull]
         public string FreefallDelay
         {
-            get { return _freefallDelay; }
+            get { return _jump.FreefallDelay == 0 ? string.Empty : _jump.FreefallDelay.ToString(CultureInfo.CurrentCulture); }
             set
             {
-                if (value == null) throw new ArgumentNullException("value");
-
-                if (value.Equals(_freefallDelay))
-                {
-                    return;
-                }
-                _freefallDelay = value;
+                _jump.FreefallDelay = string.IsNullOrEmpty(value) ? 0 : int.Parse(value, CultureInfo.CurrentCulture);
                 OnPropertyChanged();
             }
         }
@@ -198,19 +169,15 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Gets or sets the total time.
         /// </summary>
-        [NotNull]
         public string TotalTime
         {
-            get { return _totalTime; }
+            get
+            {
+                return _jump.TotalTime == 0 ? string.Empty : _jump.TotalTime.ToString(CultureInfo.CurrentCulture);
+            }
             set
             {
-                if (value == null) throw new ArgumentNullException("value");
-
-                if (value.Equals(_totalTime))
-                {
-                    return;
-                }
-                _totalTime = value;
+                _jump.TotalTime = string.IsNullOrEmpty(value) ? 0 : int.Parse(value, CultureInfo.CurrentCulture);
                 OnPropertyChanged();
             }
         }
@@ -221,16 +188,16 @@ namespace DropZone.ViewModels
         [NotNull]
         public string Container
         {
-            get { return _container; }
+            get { return _jump.Container; }
             set
             {
                 if (value == null) throw new ArgumentNullException("value");
 
-                if (value.Equals(_container, StringComparison.Ordinal))
+                if (value.Equals(_jump.Container, StringComparison.Ordinal))
                 {
                     return;
                 }
-                _container = value;
+                _jump.Container = value;
                 OnPropertyChanged();
             }
         }
@@ -241,16 +208,16 @@ namespace DropZone.ViewModels
         [NotNull]
         public string Description
         {
-            get { return _description; }
+            get { return _jump.Description; }
             set
             {
                 if (value == null) throw new ArgumentNullException("value");
 
-                if (value.Equals(_description, StringComparison.Ordinal))
+                if (value.Equals(_jump.Description, StringComparison.Ordinal))
                 {
                     return;
                 }
-                _description = value;
+                _jump.Description = value;
                 OnPropertyChanged();
             }
         }
@@ -261,11 +228,11 @@ namespace DropZone.ViewModels
         [NotNull]
         public Uri ThumbnailImage
         {
-            get { return _thumbnailImage; }
+            get { return _jump.ThumbnailImage; }
             set
             {
                 if (value == null) throw new ArgumentNullException("value");
-                _thumbnailImage = value;
+                _jump.ThumbnailImage = value;
                 OnPropertyChanged();
             }
         }
@@ -278,6 +245,14 @@ namespace DropZone.ViewModels
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// <summary>
+        /// Saves this jump.
+        /// </summary>
+        public async Task Save()
+        {
+            await _repository.Save(_jump);
         }
     }
 }

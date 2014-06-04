@@ -8,23 +8,40 @@ namespace DropZone.Models
     /// </summary>
     public class Jump : IJump
     {
-        private readonly string _jumpNumber;
-        private readonly DateTime _jumpDate;
-        private readonly string _location;
-        private readonly string _aircraft;
-        private readonly uint _altitude;
-        private readonly string _manoeuvre;
-        private readonly uint _freefallDelay;
-        private readonly uint _totalTime;
-        private readonly string _container;
-        private readonly string _description;
-        private readonly Uri _thumbnailImage;
+        private string _jumpNumber;
+        private DateTime _jumpDate;
+        private string _location;
+        private string _aircraft;
+        private int _altitude;
+        private string _manoeuvre;
+        private int _freefallDelay;
+        private int _totalTime;
+        private string _container;
+        private string _description;
+        private Uri _thumbnailImage;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Jump"/> class.
         /// </summary>
-        public Jump([NotNull] string jumpNumber, DateTime jumpDate, [NotNull] string location, [NotNull] string aircraft, uint altitude,
-            [NotNull] string manoeuvre, uint freefallDelay, uint totalTime, [NotNull] string container,
+        public Jump()
+        {
+            _jumpDate = DateTime.Now;
+            _jumpNumber = string.Empty;
+            _location = string.Empty;
+            _aircraft = string.Empty;
+            _altitude = 0;
+            _manoeuvre = string.Empty;
+            _freefallDelay = 0;
+            _totalTime = 0;
+            _container = string.Empty;
+            _description = string.Empty;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Jump"/> class.
+        /// </summary>
+        public Jump([NotNull] string jumpNumber, DateTime jumpDate, [NotNull] string location, [NotNull] string aircraft, int altitude,
+            [NotNull] string manoeuvre, int freefallDelay, int totalTime, [NotNull] string container,
             [NotNull] string description, [NotNull] Uri thumbnailImage)
         {
             if (jumpNumber == null) throw new ArgumentNullException("jumpNumber");
@@ -54,6 +71,11 @@ namespace DropZone.Models
         public string JumpNumber
         {
             get { return _jumpNumber; }
+            set
+            {
+                if (value == null) throw new ArgumentNullException("value");
+                _jumpNumber = value;
+            }
         }
 
         /// <summary>
@@ -62,6 +84,7 @@ namespace DropZone.Models
         public DateTime JumpDate
         {
             get { return _jumpDate; }
+            set { _jumpDate = value; }
         }
 
         /// <summary>
@@ -70,6 +93,11 @@ namespace DropZone.Models
         public string Location
         {
             get { return _location; }
+            set
+            {
+                if (value == null) throw new ArgumentNullException("value");
+                _location = value;
+            }
         }
 
         /// <summary>
@@ -78,14 +106,20 @@ namespace DropZone.Models
         public string Aircraft
         {
             get { return _aircraft; }
+            set
+            {
+                if (value == null) throw new ArgumentNullException("value");
+                _aircraft = value;
+            }
         }
 
         /// <summary>
         /// Gets the altitude of the jump.
         /// </summary>
-        public uint Altitude
+        public int Altitude
         {
             get { return _altitude; }
+            set { _altitude = value; }
         }
 
         /// <summary>
@@ -94,22 +128,29 @@ namespace DropZone.Models
         public string Manoeuvre
         {
             get { return _manoeuvre; }
+            set
+            {
+                if (value == null) throw new ArgumentNullException("value");
+                _manoeuvre = value;
+            }
         }
 
         /// <summary>
         /// Gets the freefall delay of the jump.
         /// </summary>
-        public uint FreefallDelay
+        public int FreefallDelay
         {
             get { return _freefallDelay; }
+            set { _freefallDelay = value; }
         }
 
         /// <summary>
         /// Gets the total time of the jump in seconds.
         /// </summary>
-        public uint TotalTime
+        public int TotalTime
         {
             get { return _totalTime; }
+            set { _totalTime = value; }
         }
 
         /// <summary>
@@ -118,6 +159,11 @@ namespace DropZone.Models
         public string Container
         {
             get { return _container; }
+            set
+            {
+                if (value == null) throw new ArgumentNullException("value");
+                _container = value;
+            }
         }
 
         /// <summary>
@@ -126,6 +172,11 @@ namespace DropZone.Models
         public string Description
         {
             get { return _description; }
+            set
+            {
+                if (value == null) throw new ArgumentNullException("value");
+                _description = value;
+            }
         }
 
         /// <summary>
@@ -134,6 +185,11 @@ namespace DropZone.Models
         public Uri ThumbnailImage
         {
             get { return _thumbnailImage; }
+            set
+            {
+                if (value == null) throw new ArgumentNullException("value");
+                 _thumbnailImage = value;
+            }
         }
     }
 }
