@@ -14,8 +14,10 @@ namespace DropZone.Views
         {
             Image image = new Image
             {
-                HorizontalOptions = LayoutOptions.Start
+                HorizontalOptions = LayoutOptions.Start,
+                Aspect = Aspect.AspectFill
             };
+
             image.SetBinding(Image.SourceProperty, new Binding("ThumbnailImage"));
             image.WidthRequest = image.HeightRequest = 100;
 
