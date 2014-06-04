@@ -6,16 +6,18 @@ using System.Threading.Tasks;
 using DropZone.Annotations;
 using DropZone.Models;
 using DropZone.Repository;
+using Xamarin.Forms;
 
 namespace DropZone.ViewModels
 {
     /// <summary>
     /// The main view model.
     /// </summary>
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainPageViewModel : INotifyPropertyChanged
     {
         private readonly IRepository _repository;
         private IEnumerable<JumpViewModel> _jumps;
+        private INavigation _navigation;
 
         /// <summary>
         /// Occurs when a property value changes.
@@ -23,9 +25,9 @@ namespace DropZone.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MainViewModel"/> class.
+        /// Initializes a new instance of the <see cref="MainPageViewModel"/> class.
         /// </summary>
-        public MainViewModel([NotNull] IRepository repository)
+        public MainPageViewModel([NotNull] IRepository repository)
         {
             if (repository == null) throw new ArgumentNullException("repository");
 
@@ -36,8 +38,11 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Called when the page has been loaded.
         /// </summary>
-        public async Task OnLoad()
+        public async Task OnLoad([NotNull] INavigation navigation)
         {
+            if (navigation == null) throw new ArgumentNullException("navigation");
+
+            _navigation = navigation;
             IEnumerable<IJump> jumps = await _repository.LoadAllJumps();
             List<JumpViewModel> jumpViewModels = new List<JumpViewModel>();
             foreach (IJump jump in jumps)
@@ -70,6 +75,16 @@ namespace DropZone.ViewModels
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// <summary>
+        /// Handles when an items is selected.
+        /// </summary>
+        public void ItemSelected([NotNull] JumpViewModel selectedItem)
+        {
+            if (selectedItem == null) throw new ArgumentNullException("selectedItem");
+
+            _navigation.PushAsync(App.GetJumpPage(selectedItem));
         }
     }
 }

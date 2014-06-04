@@ -21,7 +21,7 @@ namespace DropZone
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public static Page GetMainPage()
         {
-            MainViewModel viewModel = new MainViewModel(Repository);
+            MainPageViewModel viewModel = new MainPageViewModel(Repository);
             MainPage mainPage = new MainPage(viewModel);
             NavigationPage navigationPage = new NavigationPage(mainPage);
             
@@ -35,7 +35,15 @@ namespace DropZone
         public static Page GetJumpPage()
         {
             JumpViewModel newJump = new JumpViewModel();
-            return new JumpPage(newJump);
+            return GetJumpPage(newJump);
+        }
+
+        /// <summary>
+        /// Gets the jump page.
+        /// </summary>
+        public static Page GetJumpPage(JumpViewModel jump)
+        {
+            return new JumpPage(jump);
         }
     }
 }

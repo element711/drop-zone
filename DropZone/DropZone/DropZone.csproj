@@ -61,7 +61,7 @@
     <Compile Include="Repository\FakeRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="ViewModels\JumpViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Views\JumpPage.cs" />
     <Compile Include="Views\JumpCell.cs" />
     <Compile Include="Views\MainPage.cs" />

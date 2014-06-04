@@ -13,29 +13,29 @@ namespace DropZone.Views
         /// <summary>
         /// Initializes a new instance of the <see cref="MainPage"/> class.
         /// </summary>
-        public MainPage([NotNull] MainViewModel viewModel)
+        public MainPage([NotNull] MainPageViewModel viewModel)
         {
             if (viewModel == null) throw new ArgumentNullException("viewModel");
 
             ConfigureViewModel(viewModel);
             ConfigureToolbar();
-            ConfigureContent();
+            ConfigureContent(viewModel);
         }
 
-        private void ConfigureViewModel(MainViewModel viewModel)
+        private void ConfigureViewModel(MainPageViewModel viewModel)
         {
             BindingContext = viewModel;
 
             Appearing += async (sender, args) =>
             {
                 IsBusy = true;
-                await viewModel.OnLoad();
+                await viewModel.OnLoad(Navigation);
                 IsBusy = false;
             };
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Xamarin.Forms.Label.set_Text(System.String)")]
-        private void ConfigureContent()
+        private void ConfigureContent(MainPageViewModel viewModel)
         {
             Label header = new Label
             {
@@ -48,10 +48,11 @@ namespace DropZone.Views
             
             ListView listView = new ListView
             {
-                ItemTemplate = new DataTemplate(typeof(JumpCell))
+                ItemTemplate = new DataTemplate(typeof(JumpCell)),
             };
             listView.SetBinding(ListView.ItemsSourceProperty, "Jumps");
-
+            listView.ItemSelected += (sender, args) => viewModel.ItemSelected((JumpViewModel)args.SelectedItem);
+            
             // Accomodate iPhone status bar.
             Padding = new Thickness(10, Device.OnPlatform(20, 0, 0), 10, 5);
 
