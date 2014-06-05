@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using DropZone.Annotations;
@@ -16,6 +17,7 @@ namespace DropZone.ViewModels
     public class MainPageViewModel : INotifyPropertyChanged
     {
         private readonly IRepository _repository;
+        private IEnumerable<JumpViewModel> _allJumps;
         private IEnumerable<JumpViewModel> _jumps;
         private INavigation _navigation;
 
@@ -32,6 +34,7 @@ namespace DropZone.ViewModels
             if (repository == null) throw new ArgumentNullException("repository");
 
             _repository = repository;
+            _allJumps = new List<JumpViewModel>();
             _jumps = new List<JumpViewModel>();
         }
 
@@ -49,6 +52,7 @@ namespace DropZone.ViewModels
             {
                 jumpViewModels.Add(new JumpViewModel(jump, _repository));
             }
+            _allJumps = jumpViewModels;
             Jumps = jumpViewModels;
         }
 
@@ -85,6 +89,20 @@ namespace DropZone.ViewModels
             if (selectedItem == null) throw new ArgumentNullException("selectedItem");
 
             _navigation.PushAsync(App.GetJumpPage(selectedItem));
+        }
+
+        /// <summary>
+        /// Filters the specified search.
+        /// </summary>
+        public void Filter([NotNull] string search)
+        {
+            if (search == null) throw new ArgumentNullException("search");
+
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                Jumps = _allJumps;                
+            }
+            Jumps = _allJumps.Where(jump => jump.JumpNumber.ToLower().Contains(search.ToLower()));
         }
     }
 }

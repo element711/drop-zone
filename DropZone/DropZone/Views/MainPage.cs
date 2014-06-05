@@ -45,7 +45,11 @@ namespace DropZone.Views
                 VerticalOptions = LayoutOptions.Start,
                 HeightRequest = 50
             };
-            
+
+            SearchBar search = new SearchBar();
+            search.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            search.TextChanged += (sender, args) => viewModel.Filter(args.NewTextValue);
+
             ListView listView = new ListView
             {
                 ItemTemplate = new DataTemplate(typeof(JumpCell)),
@@ -62,6 +66,7 @@ namespace DropZone.Views
                 Children = 
                 {
                     header,
+                    search,
                     listView
                 }
             };
