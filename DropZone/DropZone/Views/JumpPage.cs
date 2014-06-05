@@ -140,7 +140,13 @@ namespace DropZone.Views
 
             ScrollView scrollView = new ScrollView
             {
-                Content = grid
+                Content = new StackLayout
+                {
+                    Children =
+                    {
+                        grid
+                    }
+                }
             };
 
             Content = scrollView;

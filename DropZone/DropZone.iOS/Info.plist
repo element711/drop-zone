@@ -25,7 +25,7 @@
     <key>CFBundleDisplayName</key>
     <string>DropZone</string>
     <key>CFBundleIdentifier</key>
-    <string>com.yourcompany.DropZone</string>
+    <string>com.nzchrisp.DropZone</string>
     <key>CFBundleVersion</key>
     <string>1.0</string>
   </dict>

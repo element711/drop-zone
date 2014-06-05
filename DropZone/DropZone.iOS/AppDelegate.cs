@@ -31,6 +31,7 @@ namespace DropZone.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Forms.Init();
+            Xamarin.FormsMaps.Init();
 
             window = new UIWindow(UIScreen.MainScreen.Bounds);
 

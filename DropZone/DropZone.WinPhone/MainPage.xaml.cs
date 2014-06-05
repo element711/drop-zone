@@ -1,4 +1,5 @@
 ﻿using Microsoft.Phone.Controls;
+using Xamarin;
 using Xamarin.Forms;
 
 
@@ -17,6 +18,7 @@ namespace DropZone.WinPhone
             InitializeComponent();
 
             Forms.Init();
+            FormsMaps.Init();
             Content = DropZone.App.GetMainPage().ConvertPageToUIElement(this);
         }
     }
