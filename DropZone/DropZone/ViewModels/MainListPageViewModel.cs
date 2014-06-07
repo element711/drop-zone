@@ -12,13 +12,13 @@ using Xamarin.Forms;
 namespace DropZone.ViewModels
 {
     /// <summary>
-    /// The main view model.
+    /// The main page list view model.
     /// </summary>
-    public class MainPageViewModel : INotifyPropertyChanged
+    public class MainListPageViewModel : INotifyPropertyChanged
     {
         private readonly IRepository _repository;
-        private List<JumpViewModel> _allJumps;
-        private List<JumpViewModel> _jumps;
+        private IEnumerable<JumpViewModel> _allJumps;
+        private IEnumerable<JumpViewModel> _jumps;
         private INavigation _navigation;
 
         /// <summary>
@@ -27,9 +27,9 @@ namespace DropZone.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MainPageViewModel"/> class.
+        /// Initializes a new instance of the <see cref="MainListPageViewModel"/> class.
         /// </summary>
-        public MainPageViewModel([NotNull] IRepository repository)
+        public MainListPageViewModel([NotNull] IRepository repository)
         {
             if (repository == null) throw new ArgumentNullException("repository");
 
@@ -59,8 +59,7 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Gets the jumps.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly"), NotNull]
-        public List<JumpViewModel> Jumps
+        public IEnumerable<JumpViewModel> Jumps
         {
             get { return _jumps; }
             set
