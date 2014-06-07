@@ -17,8 +17,8 @@ namespace DropZone.ViewModels
     public class MainPageViewModel : INotifyPropertyChanged
     {
         private readonly IRepository _repository;
-        private IEnumerable<JumpViewModel> _allJumps;
-        private IEnumerable<JumpViewModel> _jumps;
+        private List<JumpViewModel> _allJumps;
+        private List<JumpViewModel> _jumps;
         private INavigation _navigation;
 
         /// <summary>
@@ -59,8 +59,8 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Gets the jumps.
         /// </summary>
-        [NotNull]
-        public IEnumerable<JumpViewModel> Jumps
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly"), NotNull]
+        public List<JumpViewModel> Jumps
         {
             get { return _jumps; }
             set
@@ -94,15 +94,14 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Filters the specified search.
         /// </summary>
-        public void Filter([NotNull] string search)
+        public void Filter(string search)
         {
-            if (search == null) throw new ArgumentNullException("search");
-
             if (string.IsNullOrWhiteSpace(search))
             {
-                Jumps = _allJumps;                
+                Jumps = _allJumps;
+                return;
             }
-            Jumps = _allJumps.Where(jump => jump.JumpNumber.ToLower().Contains(search.ToLower()));
+            Jumps = _allJumps.Where(jump => jump.JumpNumber.ToLower().Contains(search.ToLower())).ToList();
         }
     }
 }

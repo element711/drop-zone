@@ -37,35 +37,21 @@ namespace DropZone.Views
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Xamarin.Forms.Label.set_Text(System.String)")]
         private void ConfigureContent(MainPageViewModel viewModel)
         {
-            Label header = new Label
+            SearchBar search = new SearchBar
             {
-                Text = "Jumps",
-                Font = Font.BoldSystemFontOfSize(30),
-                HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.Start,
-                HeightRequest = 50
+                HorizontalOptions = LayoutOptions.FillAndExpand,
             };
-
-            SearchBar search = new SearchBar();
-            search.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            // TODO: This filtering has bugs and I'm not sure why - come back and look at this (need second pair of eyes?).
             search.TextChanged += (sender, args) => viewModel.Filter(args.NewTextValue);
 
-            ListView listView = new ListView
-            {
-                ItemTemplate = new DataTemplate(typeof(JumpCell)),
-            };
+            ListView listView = new ListView { ItemTemplate = new DataTemplate(typeof (JumpCell)) };
             listView.SetBinding(ListView.ItemsSourceProperty, "Jumps");
-            listView.ItemSelected += (sender, args) => viewModel.ItemSelected((JumpViewModel)args.SelectedItem);
+            listView.ItemSelected += (sender, args) => viewModel.ItemSelected((JumpViewModel) args.SelectedItem);
             
-            // Accomodate iPhone status bar.
-            Padding = new Thickness(10, Device.OnPlatform(20, 0, 0), 10, 5);
-
             Content = new StackLayout
             {
-                
                 Children = 
                 {
-                    header,
                     search,
                     listView
                 }
