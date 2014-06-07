@@ -44,7 +44,10 @@ namespace DropZone.Views
             // TODO: This filtering has bugs and I'm not sure why - come back and look at this (need second pair of eyes?).
             search.TextChanged += (sender, args) => viewModel.Filter(args.NewTextValue);
 
-            ListView listView = new ListView { ItemTemplate = new DataTemplate(typeof (JumpCell)) };
+            ListView listView = new ListView
+            {
+                ItemTemplate = new DataTemplate(typeof (JumpCell))
+            };
             listView.SetBinding(ListView.ItemsSourceProperty, "Jumps");
             listView.ItemSelected += (sender, args) => viewModel.ItemSelected((JumpViewModel) args.SelectedItem);
             
