@@ -22,7 +22,7 @@ namespace DropZone.Droid
             Forms.Init(this, bundle);
             FormsMaps.Init(this, bundle);
 
-            Page mainPage = App.GetMainPage();
+            Page mainPage = App.CreateMainPage();
             SetPage(mainPage);
         }
     }

@@ -62,9 +62,11 @@
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="ViewModels\JumpViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="Views\MainGalleryPage.cs" />
     <Compile Include="Views\JumpPage.cs" />
     <Compile Include="Views\JumpCell.cs" />
-    <Compile Include="Views\MainPage.cs" />
+    <Compile Include="Views\MainListPage.cs" />
+    <Compile Include="Views\MainTabbedPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\CodeAnalaysisDictionary.xml">

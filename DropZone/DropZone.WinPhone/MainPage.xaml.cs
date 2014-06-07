@@ -19,7 +19,7 @@ namespace DropZone.WinPhone
 
             Forms.Init();
             FormsMaps.Init();
-            Content = DropZone.App.GetMainPage().ConvertPageToUIElement(this);
+            Content = DropZone.App.CreateMainPage().ConvertPageToUIElement(this);
         }
     }
 }

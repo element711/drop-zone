@@ -14,42 +14,37 @@ namespace DropZone
 
         private static FakeRepository Repository
         {
-            get
-            {
-                if(_repository == null)
-                {
-                    _repository = new FakeRepository();
-                }
-                return _repository;
-            }
+            get { return _repository ?? (_repository = new FakeRepository()); }
         }
 
         /// <summary>
-        /// Gets the main page which will be displayed across all devices.
+        /// Creates the main page.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
-        public static Page GetMainPage()
+        public static Page CreateMainPage()
         {
             MainPageViewModel viewModel = new MainPageViewModel(Repository);
-            MainPage mainPage = new MainPage(viewModel);
-            NavigationPage navigationPage = new NavigationPage(mainPage);
-            return navigationPage;
+
+            MainListPage list = new MainListPage(viewModel);
+            MainGalleryPage gallery = new MainGalleryPage();
+
+            MainTabbedPage mainTabbedPage = new MainTabbedPage(list, gallery);
+
+            return new NavigationPage(mainTabbedPage);
         }
 
         /// <summary>
-        /// Gets the add jump page.
+        /// Creates the add jump page.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
-        public static Page GetJumpPage()
+        public static Page CreateJumpPage()
         {
             JumpViewModel newJump = new JumpViewModel(Repository);
-            return GetJumpPage(newJump);
+            return CreateJumpPage(newJump);
         }
 
         /// <summary>
-        /// Gets the jump page.
+        /// Creates the jump page.
         /// </summary>
-        public static Page GetJumpPage(JumpViewModel jump)
+        public static Page CreateJumpPage(JumpViewModel jump)
         {
             return new JumpPage(jump);
         }

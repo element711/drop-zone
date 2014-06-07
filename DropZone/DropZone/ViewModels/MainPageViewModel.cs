@@ -88,7 +88,7 @@ namespace DropZone.ViewModels
         {
             if (selectedItem == null) throw new ArgumentNullException("selectedItem");
 
-            _navigation.PushAsync(App.GetJumpPage(selectedItem));
+            _navigation.PushAsync(App.CreateJumpPage(selectedItem));
         }
 
         /// <summary>

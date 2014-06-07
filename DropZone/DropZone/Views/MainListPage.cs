@@ -6,14 +6,14 @@ using Xamarin.Forms;
 namespace DropZone.Views
 {
     /// <summary>
-    /// Represents the main page in the app.
+    /// Represents the list of jumps on the main page..
     /// </summary>
-    public class MainPage : ContentPage
+    public class MainListPage : ContentPage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MainPage"/> class.
+        /// Initializes a new instance of the <see cref="MainListPage"/> class.
         /// </summary>
-        public MainPage([NotNull] MainPageViewModel viewModel)
+        public MainListPage([NotNull] MainPageViewModel viewModel)
         {
             if (viewModel == null) throw new ArgumentNullException("viewModel");
 
@@ -62,13 +62,13 @@ namespace DropZone.Views
         {
             ToolbarItems.Clear();
             ToolbarItems.Add(new ToolbarItem("Add Jump", string.Empty, AddJump));
-            Title = "Drop Zone";
+            Title = "List";
         }
 
         private void AddJump()
         {
             ToolbarItems.Clear();
-            Navigation.PushAsync(App.GetJumpPage());
+            Navigation.PushAsync(App.CreateJumpPage());
         }
     }
 }

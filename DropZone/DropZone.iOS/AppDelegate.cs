@@ -35,7 +35,7 @@ namespace DropZone.iOS
 
             window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            window.RootViewController = App.GetMainPage().CreateViewController();
+            window.RootViewController = App.CreateMainPage().CreateViewController();
 
             window.MakeKeyAndVisible();
 
