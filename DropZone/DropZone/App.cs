@@ -10,9 +10,18 @@ namespace DropZone
     /// </summary>
     public class App
     {
+        private static FakeRepository _repository;
+
         private static FakeRepository Repository
         {
-            get { return new FakeRepository(); }
+            get
+            {
+                if(_repository == null)
+                {
+                    _repository = new FakeRepository();
+                }
+                return _repository;
+            }
         }
 
         /// <summary>
@@ -24,7 +33,6 @@ namespace DropZone
             MainPageViewModel viewModel = new MainPageViewModel(Repository);
             MainPage mainPage = new MainPage(viewModel);
             NavigationPage navigationPage = new NavigationPage(mainPage);
-            
             return navigationPage;
         }
 
@@ -34,7 +42,7 @@ namespace DropZone
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public static Page GetJumpPage()
         {
-            JumpViewModel newJump = new JumpViewModel();
+            JumpViewModel newJump = new JumpViewModel(Repository);
             return GetJumpPage(newJump);
         }
 

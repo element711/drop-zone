@@ -11,21 +11,18 @@ namespace DropZone.Repository
     /// </summary>
     public class FakeRepository : IRepository
     {
+        private static IList<IJump> _jumps;
+
         /// <summary>
-        /// Saves the specified jump.
+        /// Initializes a new instance of the <see cref="FakeRepository"/> class.
         /// </summary>
-        public async Task Save(IJump jump)
+        public FakeRepository()
         {
-            await Task.Delay(1000);
+            _jumps = CreateTestJumps();
         }
 
-        /// <summary>
-        /// Loads a list of all the jumps.
-        /// </summary>
-        public async Task<IEnumerable<IJump>> LoadAllJumps()
+        private static IList<IJump> CreateTestJumps()
         {
-            await Task.Delay(1000);
-
             return new List<IJump>
             {
                 new Jump("AFF Level 1", DateTime.Now.AddDays(-5), "Parakai", "XL-SDF", 13000, string.Empty, 50, 0, "Telesis 260", "Excellent clib out - goodexit count.", new Uri("https://skydivesandiego.com/wp-content/uploads/2009/09/soloJumping1.jpg")),
@@ -40,6 +37,25 @@ namespace DropZone.Repository
                 new Jump("AFF Level 9", DateTime.Now.AddDays(-2), "Parakai", "XL-SDF", 12500, string.Empty, 50, 0, "Telesis 260", "Minor hesitation. Minor hesitation. Minor hesitation.", new Uri("http://i.vimeocdn.com/video/468821994_640.jpg")),
                 new Jump("AFF Level 10", DateTime.Now.AddDays(-1), "Parakai", "XL-SDF", 12200, string.Empty, 50, 0, "Telesis 260", "Great jump. Great jump. Great jump. ", new Uri("http://i.vimeocdn.com/video/443254475_640.jpg"))
             };
+
+        }
+
+        /// <summary>
+        /// Saves the specified jump.
+        /// </summary>
+        public async Task Save(IJump jump)
+        {
+            _jumps.Add(jump);
+            await Task.Delay(1000);
+        }
+
+        /// <summary>
+        /// Loads a list of all the jumps.
+        /// </summary>
+        public async Task<IEnumerable<IJump>> LoadAllJumps()
+        {
+            await Task.Delay(1000);
+            return _jumps;
         }
     }
 }

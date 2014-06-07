@@ -163,6 +163,7 @@ namespace DropZone.Views
         private async Task Save(JumpViewModel viewModel)
         {
             await viewModel.Save();
+            ToolbarItems.Clear();
             await Navigation.PopAsync();
         }
     }

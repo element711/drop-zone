@@ -26,8 +26,11 @@ namespace DropZone.ViewModels
         /// Initializes a new instance of the <see cref="JumpViewModel"/> class.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public JumpViewModel()
+        public JumpViewModel([NotNull] IRepository repository)
         {
+            if (repository == null) throw new ArgumentNullException("repository");
+
+            _repository = repository;
             _jump = new Jump();
         }
 

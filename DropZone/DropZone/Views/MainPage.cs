@@ -18,8 +18,8 @@ namespace DropZone.Views
             if (viewModel == null) throw new ArgumentNullException("viewModel");
 
             ConfigureViewModel(viewModel);
-            ConfigureToolbar();
             ConfigureContent(viewModel);
+            Appearing += (sender, args) => ConfigureToolbar(); // TODO: on android the toolbar has no buttons after adding a jump ??
         }
 
         private void ConfigureViewModel(MainPageViewModel viewModel)
@@ -60,12 +60,14 @@ namespace DropZone.Views
 
         private void ConfigureToolbar()
         {
+            ToolbarItems.Clear();
             ToolbarItems.Add(new ToolbarItem("Add Jump", string.Empty, AddJump));
             Title = "Drop Zone";
         }
 
         private void AddJump()
         {
+            ToolbarItems.Clear();
             Navigation.PushAsync(App.GetJumpPage());
         }
     }
