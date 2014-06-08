@@ -46,7 +46,7 @@ namespace DropZone.Repository
         public async Task Save(IJump jump)
         {
             _jumps.Add(jump);
-            await Task.Delay(1000);
+            await Task.Delay(0);
         }
 
         /// <summary>
@@ -54,8 +54,32 @@ namespace DropZone.Repository
         /// </summary>
         public async Task<IEnumerable<IJump>> LoadAllJumps()
         {
-            await Task.Delay(1000);
+            await Task.Delay(0);
             return _jumps;
+        }
+
+        /// <summary>
+        /// Loads all aircraft.
+        /// </summary>
+        public async Task<IEnumerable<IAircraft>> LoadAllAircraft()
+        {
+            await Task.Delay(0);
+            return new[]
+            {
+                new Aircraft("Beech C90 - King Air"), 
+                new Aircraft("Cessna 182 - Skylane"), 
+                new Aircraft("Cessna 205 / 206 Skywagon"), 
+                new Aircraft("Cessna 208A/ 208B - Caravan"), 
+                new Aircraft("de Havilland Canada DHC-6"), 
+                new Aircraft("Dornier Do-28 G92"), 
+                new Aircraft("Douglas DC-3"), 
+                new Aircraft("GippsAero GA8 - Airvan"), 
+                new Aircraft("Pacific Aerospace P-750 XSTOL"), 
+                new Aircraft("Pilatus PC-6 - Porter"), 
+                new Aircraft("Quest - Kodiak"), 
+                new Aircraft("Shorts SC-7 - Skyvan"), 
+                new Aircraft("Technoavia SMG-92 - Turbo Finist")
+            };
         }
     }
 }

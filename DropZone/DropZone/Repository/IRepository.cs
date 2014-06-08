@@ -18,5 +18,10 @@ namespace DropZone.Repository
         /// Loads a list of all the jumps.
         /// </summary>
         Task<IEnumerable<IJump>> LoadAllJumps();
+
+        /// <summary>
+        /// Loads a list of aircraft.
+        /// </summary>
+        Task<IEnumerable<IAircraft>> LoadAllAircraft();
     }
 }
