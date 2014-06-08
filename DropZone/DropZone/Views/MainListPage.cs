@@ -6,7 +6,7 @@ using Xamarin.Forms;
 namespace DropZone.Views
 {
     /// <summary>
-    /// Represents the list of jumps on the main page..
+    /// The main page which list all jumps.
     /// </summary>
     public class MainListPage : ContentPage
     {
@@ -64,7 +64,7 @@ namespace DropZone.Views
         {
             ToolbarItems.Clear();
             ToolbarItems.Add(new ToolbarItem("Add Jump", string.Empty, AddJump));
-            Title = "List";
+            Title = "Jump List";
         }
 
         private void AddJump()

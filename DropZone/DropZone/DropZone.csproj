@@ -71,7 +71,9 @@
     <Compile Include="Views\JumpPage.cs" />
     <Compile Include="Views\JumpCell.cs" />
     <Compile Include="Views\MainListPage.cs" />
+    <Compile Include="Views\MainMapPage.cs" />
     <Compile Include="Views\MainTabbedPage.cs" />
+    <Compile Include="Views\MainTypePage.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\CodeAnalaysisDictionary.xml">

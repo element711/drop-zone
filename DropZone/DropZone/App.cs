@@ -23,9 +23,10 @@ namespace DropZone
         public static Page CreateMainPage()
         {
             MainListPage list = new MainListPage(new MainListPageViewModel(Repository));
+            MainTypePage type = new MainTypePage();
             MainGalleryPage gallery = new MainGalleryPage(new MainGalleyPageViewModel(Repository));
-
-            MainTabbedPage mainTabbedPage = new MainTabbedPage(list, gallery);
+            MainMapPage map = new MainMapPage();
+            MainTabbedPage mainTabbedPage = new MainTabbedPage(list, type, gallery, map);
 
             return new NavigationPage(mainTabbedPage);
         }
