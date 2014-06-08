@@ -134,6 +134,7 @@ namespace DropZone.Views
                 HorizontalOptions = LayoutOptions.Fill,
                 VerticalOptions = LayoutOptions.FillAndExpand,
             };
+            // TODO: Binding to editor does not seem to work ?
             description.SetBinding(Editor.TextProperty, "Description");
             grid.Children.Add(description, 0, 9);
 

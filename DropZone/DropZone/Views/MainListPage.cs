@@ -19,7 +19,7 @@ namespace DropZone.Views
 
             ConfigureViewModel(viewModel);
             ConfigureContent(viewModel);
-            Appearing += (sender, args) => ConfigureToolbar(); // TODO: on android the toolbar has no buttons after adding a jump ??
+            Appearing += (sender, args) => ConfigureToolbar(); // TODO: on android the toolbar has no buttons after adding a jump?
         }
 
         private void ConfigureViewModel(MainListPageViewModel viewModel)
@@ -41,7 +41,6 @@ namespace DropZone.Views
             {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
             };
-            // TODO: This filtering has bugs and I'm not sure why - come back and look at this (need second pair of eyes?).
             search.TextChanged += (sender, args) => viewModel.Filter(args.NewTextValue);
 
             ListView listView = new ListView
