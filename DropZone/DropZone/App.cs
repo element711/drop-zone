@@ -44,7 +44,7 @@ namespace DropZone
         /// </summary>
         public static Page CreateJumpPage(JumpViewModel jump)
         {
-            return new JumpPage(jump);
+            return new JumpPage(jump, Repository);
         }
     }
 }

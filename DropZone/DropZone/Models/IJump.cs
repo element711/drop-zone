@@ -25,7 +25,7 @@ namespace DropZone.Models
         /// <summary>
         /// Gets the aircraft the jump was performed out of.
         /// </summary>
-        string Aircraft { get; set; }
+        IAircraft Aircraft { get; set; }
 
         /// <summary>
         /// Gets the altitude of the jump.

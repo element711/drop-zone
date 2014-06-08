@@ -58,6 +58,7 @@
     <Compile Include="Models\IJump.cs" />
     <Compile Include="Models\Jump.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Models\UnknownAircraft.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\FakeRepository.cs" />

@@ -11,7 +11,7 @@ namespace DropZone.Models
         private string _jumpNumber;
         private DateTime _jumpDate;
         private string _location;
-        private string _aircraft;
+        private IAircraft _aircraft;
         private int _altitude;
         private string _manoeuvre;
         private int _freefallDelay;
@@ -28,7 +28,7 @@ namespace DropZone.Models
             _jumpDate = DateTime.Now;
             _jumpNumber = string.Empty;
             _location = string.Empty;
-            _aircraft = string.Empty;
+            _aircraft = new UnknownAircraft();
             _altitude = 0;
             _manoeuvre = string.Empty;
             _freefallDelay = 0;
@@ -40,7 +40,7 @@ namespace DropZone.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Jump"/> class.
         /// </summary>
-        public Jump([NotNull] string jumpNumber, DateTime jumpDate, [NotNull] string location, [NotNull] string aircraft, int altitude,
+        public Jump([NotNull] string jumpNumber, DateTime jumpDate, [NotNull] string location, [NotNull] IAircraft aircraft, int altitude,
             [NotNull] string manoeuvre, int freefallDelay, int totalTime, [NotNull] string container,
             [NotNull] string description, [NotNull] Uri thumbnailImage)
         {
@@ -103,7 +103,7 @@ namespace DropZone.Models
         /// <summary>
         /// Gets the aircraft the jump was performed out of.
         /// </summary>
-        public string Aircraft
+        public IAircraft Aircraft
         {
             get { return _aircraft; }
             set

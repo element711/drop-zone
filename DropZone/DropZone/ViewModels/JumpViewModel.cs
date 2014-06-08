@@ -104,20 +104,16 @@ namespace DropZone.ViewModels
         }
 
         /// <summary>
-        /// Gets or sets the name of the aircraft.
+        /// Gets or sets the aircraft.
         /// </summary>
         [NotNull]
-        public string Aircraft
+        public IAircraft Aircraft
         {
             get { return _jump.Aircraft; }
             set
             {
                 if (value == null) throw new ArgumentNullException("value");
 
-                if (value.Equals(_jump.Aircraft, StringComparison.Ordinal))
-                {
-                    return;
-                }
                 _jump.Aircraft = value;
                 OnPropertyChanged();
             }

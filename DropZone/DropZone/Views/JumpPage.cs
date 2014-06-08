@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DropZone.Annotations;
+using DropZone.Models;
+using DropZone.Repository;
 using DropZone.ViewModels;
 using Xamarin.Forms;
 
@@ -14,13 +18,14 @@ namespace DropZone.Views
         /// <summary>
         /// Initializes a new instance of the <see cref="JumpPage"/> class.
         /// </summary>
-        public JumpPage([NotNull] JumpViewModel viewModel)
+        public JumpPage([NotNull] JumpViewModel viewModel, [NotNull] IRepository repository)
         {
             if (viewModel == null) throw new ArgumentNullException("viewModel");
+            if (repository == null) throw new ArgumentNullException("repository");
 
-            ConfigureViewModel(viewModel);
             ConfigureToolbar(viewModel);
-            ConfigureContent();
+            ConfigureContent(viewModel, repository);
+            ConfigureViewModel(viewModel);
         }
 
         private void ConfigureViewModel(JumpViewModel viewModel)
@@ -28,7 +33,7 @@ namespace DropZone.Views
             BindingContext = viewModel;            
         }
 
-        private void ConfigureContent()
+        private async void ConfigureContent(JumpViewModel viewModel, IRepository repository)
         {
             Grid grid = new Grid
             {
@@ -73,14 +78,8 @@ namespace DropZone.Views
             location.SetBinding(Entry.TextProperty, "Location");
             grid.Children.Add(location, 0, 2);
             
-            Entry aircraft = new Entry
-            {
-                Placeholder = "Aircraft",
-                HorizontalOptions = LayoutOptions.Fill,
-                VerticalOptions = LayoutOptions.Fill,
-            };
-            aircraft.SetBinding(Entry.TextProperty, "Aircraft");
-            grid.Children.Add(aircraft, 0, 3);
+            Picker aircraftPicker = await CreateAircraftPicker(viewModel, repository);
+            grid.Children.Add(aircraftPicker, 0, 3);
 
             Entry altitude = new Entry
             {
@@ -150,6 +149,34 @@ namespace DropZone.Views
             };
 
             Content = scrollView;
+        }
+
+        // TODO: Change this to bind to view model. The Picker class is not yet bindable. 8/6/2014
+        // http://forums.xamarin.com/discussion/17875/binding-to-picker-items
+        private static async Task<Picker> CreateAircraftPicker(JumpViewModel viewModel, IRepository repository)
+        {
+            Picker aircraftPicker = new Picker
+            {
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                Title = "Aircraft",
+            };
+
+            IList<IAircraft> allAircraft = (await repository.LoadAllAircraft()).ToList();
+            allAircraft.Add(new UnknownAircraft());
+
+            foreach (IAircraft aircraft in allAircraft)
+            {
+                aircraftPicker.Items.Add(aircraft.Name);
+            }
+
+
+            aircraftPicker.SelectedIndex = aircraftPicker.Items.IndexOf(viewModel.Aircraft.Name);
+            aircraftPicker.SelectedIndexChanged += (sender, args) =>
+            {
+                viewModel.Aircraft = allAircraft.First(aircraft => aircraft.Name ==
+                                allAircraft.ElementAt(aircraftPicker.SelectedIndex).Name);
+            };
+            return aircraftPicker;
         }
 
         private void ConfigureToolbar(JumpViewModel viewModel)
