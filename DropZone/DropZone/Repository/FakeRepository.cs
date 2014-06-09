@@ -14,6 +14,7 @@ namespace DropZone.Repository
     {
         private static IList<IJump> _jumps;
         private static Aircraft[] _allAircraft;
+        private static IEnumerable<IJumpType> _jumpTypes;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FakeRepository"/> class.
@@ -21,6 +22,7 @@ namespace DropZone.Repository
         public FakeRepository()
         {
             _allAircraft = CreateTestAircraft();
+            _jumpTypes = CreateJumpTypes();
             _jumps = CreateTestJumps();
         }
 
@@ -41,6 +43,23 @@ namespace DropZone.Repository
                 new Aircraft("Quest - Kodiak"), 
                 new Aircraft("Shorts SC-7 - Skyvan"), 
                 new Aircraft("Technoavia SMG-92 - Turbo Finist")
+            };
+        }
+
+        private static IEnumerable<IJumpType> CreateJumpTypes()
+        {
+            return new[]
+            {
+                new JumpType("BASE"), 
+                new JumpType("Belly/RW"), 
+                new JumpType("Freefly"), 
+                new JumpType("Hop and Pop"), 
+                new JumpType("Hybrid"), 
+                new JumpType("Skysurfing"), 
+                new JumpType("Tandem"), 
+                new JumpType("Tracking"), 
+                new JumpType("Wingsuit"), 
+                new JumpType("Other") 
             };
         }
 
@@ -79,6 +98,15 @@ namespace DropZone.Repository
         {
             await Task.Delay(0);
             return _jumps;
+        }
+
+        /// <summary>
+        /// Loads all jump types.
+        /// </summary>
+        public async Task<IEnumerable<IJumpType>> LoadAllJumpTypes()
+        {
+            await Task.Delay(0);
+            return _jumpTypes;
         }
 
         /// <summary>

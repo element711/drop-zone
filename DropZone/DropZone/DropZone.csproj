@@ -56,8 +56,10 @@
     <Compile Include="Models\Aircraft.cs" />
     <Compile Include="Models\IAircraft.cs" />
     <Compile Include="Models\IJump.cs" />
+    <Compile Include="Models\IJumpType.cs" />
     <Compile Include="Models\Jump.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Models\JumpType.cs" />
     <Compile Include="Models\UnknownAircraft.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
