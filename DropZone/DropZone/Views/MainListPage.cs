@@ -13,7 +13,7 @@ namespace DropZone.Views
         /// <summary>
         /// Initializes a new instance of the <see cref="MainListPage"/> class.
         /// </summary>
-        public MainListPage([NotNull] MainListPageViewModel viewModel)
+        public MainListPage([NotNull] MainPageViewModel viewModel)
         {
             if (viewModel == null) throw new ArgumentNullException("viewModel");
 
@@ -22,7 +22,7 @@ namespace DropZone.Views
             Appearing += (sender, args) => ConfigureToolbar(); // TODO: on android the toolbar has no buttons after adding a jump?
         }
 
-        private void ConfigureViewModel(MainListPageViewModel viewModel)
+        private void ConfigureViewModel(MainPageViewModel viewModel)
         {
             BindingContext = viewModel;
 
@@ -35,7 +35,7 @@ namespace DropZone.Views
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Xamarin.Forms.Label.set_Text(System.String)")]
-        private void ConfigureContent(MainListPageViewModel viewModel)
+        private void ConfigureContent(MainPageViewModel viewModel)
         {
             SearchBar search = new SearchBar
             {

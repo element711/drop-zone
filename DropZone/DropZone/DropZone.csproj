@@ -65,7 +65,7 @@
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="ViewModels\JumpViewModel.cs" />
     <Compile Include="ViewModels\MainGalleyPageViewModel.cs" />
-    <Compile Include="ViewModels\MainListPageViewModel.cs" />
+    <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Views\GalleryItem.cs" />
     <Compile Include="Views\MainGalleryPage.cs" />
     <Compile Include="Views\JumpPage.cs" />

@@ -12,9 +12,9 @@ using Xamarin.Forms;
 namespace DropZone.ViewModels
 {
     /// <summary>
-    /// The main page list view model.
+    /// The main page view model.
     /// </summary>
-    public class MainListPageViewModel : INotifyPropertyChanged
+    public class MainPageViewModel : INotifyPropertyChanged
     {
         private readonly IRepository _repository;
         private IEnumerable<JumpViewModel> _allJumps;
@@ -27,9 +27,9 @@ namespace DropZone.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MainListPageViewModel"/> class.
+        /// Initializes a new instance of the <see cref="MainPageViewModel"/> class.
         /// </summary>
-        public MainListPageViewModel([NotNull] IRepository repository)
+        public MainPageViewModel([NotNull] IRepository repository)
         {
             if (repository == null) throw new ArgumentNullException("repository");
 
