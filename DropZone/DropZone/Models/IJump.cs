@@ -33,9 +33,9 @@ namespace DropZone.Models
         int Altitude { get; set; }
 
         /// <summary>
-        /// Gets the manoeuvre performed during the jump.
+        /// Gets the jump type manoeuvre performed.
         /// </summary>
-        string Manoeuvre { get; set; }
+        IJumpType JumpType { get; set; }
 
         /// <summary>
         /// Gets the freefall delay of the jump.

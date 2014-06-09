@@ -91,14 +91,8 @@ namespace DropZone.Views
             altitude.SetBinding(Entry.TextProperty, "Altitude");
             grid.Children.Add(altitude, 0, 4);
 
-            Entry manoeuvre = new Entry
-            {
-                Placeholder = "Manoeuvre",
-                HorizontalOptions = LayoutOptions.Fill,
-                VerticalOptions = LayoutOptions.Fill,
-            };
-            manoeuvre.SetBinding(Entry.TextProperty, "Manoeuvre");
-            grid.Children.Add(manoeuvre, 0, 5);
+            Picker jumpTypePicker = await CreateJumpTypePicker(viewModel, repository);
+            grid.Children.Add(jumpTypePicker, 0, 5);
 
             Entry freefallDelay = new Entry
             {
@@ -178,6 +172,33 @@ namespace DropZone.Views
                                 allAircraft.ElementAt(aircraftPicker.SelectedIndex).Name);
             };
             return aircraftPicker;
+        }
+
+        // TODO: Change this to bind to view model. The Picker class is not yet bindable. 9/6/2014
+        // http://forums.xamarin.com/discussion/17875/binding-to-picker-items
+        private static async Task<Picker> CreateJumpTypePicker(JumpViewModel viewModel, IRepository repository)
+        {
+            Picker jumpTypePicker = new Picker
+            {
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                Title = "Jump Type",
+            };
+
+            List<IJumpType> allJumpTypes = (await repository.LoadAllJumpTypes()).ToList();
+            allJumpTypes.Add(new UnknownJumpType());
+
+            foreach (IJumpType jumpType in allJumpTypes)
+            {
+                jumpTypePicker.Items.Add(jumpType.Name);
+            }
+            
+            jumpTypePicker.SelectedIndex = jumpTypePicker.Items.IndexOf(viewModel.JumpType.Name);
+            jumpTypePicker.SelectedIndexChanged += (sender, args) =>
+            {
+                viewModel.JumpType = allJumpTypes.First(jumpType => jumpType.Name ==
+                                allJumpTypes.ElementAt(jumpTypePicker.SelectedIndex).Name);
+            };
+            return jumpTypePicker;
         }
 
         private void ConfigureToolbar(JumpViewModel viewModel)

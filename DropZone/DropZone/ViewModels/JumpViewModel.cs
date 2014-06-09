@@ -133,21 +133,17 @@ namespace DropZone.ViewModels
         }
 
         /// <summary>
-        /// Gets or sets the manoeuvre performed.
+        /// Gets or sets the jump type manoeuvre performed.
         /// </summary>
         [NotNull]
-        public string Manoeuvre
+        public IJumpType JumpType
         {
-            get { return _jump.Manoeuvre; }
+            get { return _jump.JumpType; }
             set
             {
                 if (value == null) throw new ArgumentNullException("value");
 
-                if (value.Equals(_jump.Manoeuvre, StringComparison.Ordinal))
-                {
-                    return;
-                }
-                _jump.Manoeuvre = value;
+                _jump.JumpType = value;
                 OnPropertyChanged();
             }
         }

@@ -13,7 +13,7 @@ namespace DropZone.Models
         private string _location;
         private IAircraft _aircraft;
         private int _altitude;
-        private string _manoeuvre;
+        private IJumpType _jumpType;
         private int _freefallDelay;
         private int _totalTime;
         private string _container;
@@ -30,7 +30,7 @@ namespace DropZone.Models
             _location = string.Empty;
             _aircraft = new UnknownAircraft();
             _altitude = 0;
-            _manoeuvre = string.Empty;
+            _jumpType = new UnknownJumpType();
             _freefallDelay = 0;
             _totalTime = 0;
             _container = string.Empty;
@@ -41,13 +41,13 @@ namespace DropZone.Models
         /// Initializes a new instance of the <see cref="Jump"/> class.
         /// </summary>
         public Jump([NotNull] string jumpNumber, DateTime jumpDate, [NotNull] string location, [NotNull] IAircraft aircraft, int altitude,
-            [NotNull] string manoeuvre, int freefallDelay, int totalTime, [NotNull] string container,
+            [NotNull] IJumpType jumpType, int freefallDelay, int totalTime, [NotNull] string container,
             [NotNull] string description, [NotNull] Uri thumbnailImage)
         {
             if (jumpNumber == null) throw new ArgumentNullException("jumpNumber");
             if (location == null) throw new ArgumentNullException("location");
             if (aircraft == null) throw new ArgumentNullException("aircraft");
-            if (manoeuvre == null) throw new ArgumentNullException("manoeuvre");
+            if (jumpType == null) throw new ArgumentNullException("jumpType");
             if (container == null) throw new ArgumentNullException("container");
             if (description == null) throw new ArgumentNullException("description");
             if (thumbnailImage == null) throw new ArgumentNullException("thumbnailImage");
@@ -57,7 +57,7 @@ namespace DropZone.Models
             _location = location;
             _aircraft = aircraft;
             _altitude = altitude;
-            _manoeuvre = manoeuvre;
+            _jumpType = jumpType;
             _freefallDelay = freefallDelay;
             _totalTime = totalTime;
             _container = container;
@@ -123,15 +123,15 @@ namespace DropZone.Models
         }
 
         /// <summary>
-        /// Gets the manoeuvre performed during the jump.
+        /// Gets the jump type manoeuvre performed.
         /// </summary>
-        public string Manoeuvre
+        public IJumpType JumpType
         {
-            get { return _manoeuvre; }
+            get { return _jumpType; }
             set
             {
                 if (value == null) throw new ArgumentNullException("value");
-                _manoeuvre = value;
+                _jumpType = value;
             }
         }
 
