@@ -66,6 +66,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\FakeRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="ViewModels\JumpByTypeCollection.cs" />
     <Compile Include="ViewModels\JumpViewModel.cs" />
     <Compile Include="ViewModels\MainGalleyPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />

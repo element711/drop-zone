@@ -67,6 +67,27 @@ namespace DropZone.ViewModels
                 if (value == null) throw new ArgumentNullException("value");
                 _jumps = value;
                 OnPropertyChanged();
+                OnPropertyChanged("JumpsGroupedByType");
+            }
+        }
+
+        /// <summary>
+        /// Gets the jumps grouped by jump type.
+        /// </summary>
+        public IEnumerable<JumpByTypeCollection> JumpsGroupedByType
+        {
+            get
+            {
+                IEnumerable<IGrouping<IJumpType, JumpViewModel>> groupedJumps = Jumps.GroupBy(jump => jump.JumpType).ToList();
+                IEnumerable<IJumpType> allJumpTypes = groupedJumps.Select(jump => jump.Key).ToList();
+                foreach (IJumpType jumpType in allJumpTypes)
+                {
+                    IJumpType type = jumpType;
+                    IEnumerable<JumpViewModel> viewModelsForJumpType = groupedJumps
+                                                        .Where(jump => jump.Key == type)
+                                                        .SelectMany(j => j);
+                    yield return new JumpByTypeCollection(jumpType, viewModelsForJumpType);
+                }
             }
         }
 

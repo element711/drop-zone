@@ -34,7 +34,6 @@ namespace DropZone.Views
             };
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Xamarin.Forms.Label.set_Text(System.String)")]
         private void ConfigureContent(MainPageViewModel viewModel)
         {
             SearchBar search = new SearchBar

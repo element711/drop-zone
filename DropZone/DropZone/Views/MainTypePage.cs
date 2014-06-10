@@ -1,3 +1,6 @@
+using System;
+using DropZone.Annotations;
+using DropZone.ViewModels;
 using Xamarin.Forms;
 
 namespace DropZone.Views
@@ -10,22 +13,43 @@ namespace DropZone.Views
         /// <summary>
         /// Initializes a new instance of the <see cref="MainTypePage"/> class.
         /// </summary>
-        public MainTypePage()
+        public MainTypePage([NotNull] MainPageViewModel viewModel)
         {
-            //ConfigureViewModel(viewModel);
-            ConfigureContent();
-            ConfigureToolbar();
+            if (viewModel == null) throw new ArgumentNullException("viewModel");
+
+            ConfigureViewModel(viewModel);
+            ConfigureContent(viewModel);
+            ConfigureToolbar(); 
+        }
+
+        private void ConfigureViewModel(MainPageViewModel viewModel)
+        {
+            BindingContext = viewModel;
+
+            Appearing += async (sender, args) =>
+            {
+                IsBusy = true;
+                await viewModel.OnLoad(Navigation);
+                IsBusy = false;
+            };
+        }
+
+        private void ConfigureContent(MainPageViewModel viewModel)
+        {
+            ListView listView = new ListView
+            {
+                ItemTemplate = new DataTemplate(typeof (JumpCell)),
+                IsGroupingEnabled = true,
+                GroupDisplayBinding = new Binding("JumpTypeName"),
+            };
+            listView.SetBinding(ListView.ItemsSourceProperty, "JumpsGroupedByType");
+            listView.ItemSelected += (sender, args) => viewModel.ItemSelected((JumpViewModel) args.SelectedItem);
+            Content = listView;
         }
 
         private void ConfigureToolbar()
         {
             Title = "Jump Types";
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Xamarin.Forms.Label.set_Text(System.String)")]
-        private void ConfigureContent()
-        {
-            Content = new Label{Text = "Jumps grouped by type"};
         }
     }
 }

@@ -26,7 +26,7 @@ namespace DropZone
             MainGalleyPageViewModel galleryViewModel = new MainGalleyPageViewModel(Repository);
 
             MainListPage list = new MainListPage(mainViewModel);
-            MainTypePage type = new MainTypePage();
+            MainTypePage type = new MainTypePage(mainViewModel);
             MainGalleryPage gallery = new MainGalleryPage(galleryViewModel);
             MainMapPage map = new MainMapPage(Repository);
 
