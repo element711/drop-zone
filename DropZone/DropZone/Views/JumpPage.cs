@@ -49,7 +49,8 @@ namespace DropZone.Views
                     new RowDefinition(),
                     new RowDefinition(),
                     new RowDefinition(),
-                    new RowDefinition{ Height = 300 }
+                    new RowDefinition{ Height = 300 },
+                    new RowDefinition()
                 },
                 ColumnDefinitions = new ColumnDefinitionCollection
                 {
@@ -131,6 +132,10 @@ namespace DropZone.Views
             // TODO: Binding to editor does not seem to work ?
             description.SetBinding(Editor.TextProperty, "Description");
             grid.Children.Add(description, 0, 9);
+
+
+            Button addImage = new Button{Text = "Select Image"};
+            grid.Children.Add(addImage, 0, 10);
 
             ScrollView scrollView = new ScrollView
             {
