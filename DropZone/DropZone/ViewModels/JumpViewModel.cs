@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DropZone.Annotations;
 using DropZone.Models;
 using DropZone.Repository;
+using Xamarin.Forms;
 
 namespace DropZone.ViewModels
 {
@@ -221,13 +222,16 @@ namespace DropZone.ViewModels
         /// Gets or sets the image.
         /// </summary>
         [NotNull]
-        public Uri ThumbnailImage
+        public UriImageSource ThumbnailImage
         {
-            get { return _jump.ThumbnailImage; }
+            get
+            {
+                return new UriImageSource { Uri = _jump.ThumbnailImage, CachingEnabled = true, CacheValidity = TimeSpan.FromMinutes(10) };
+            }
             set
             {
                 if (value == null) throw new ArgumentNullException("value");
-                _jump.ThumbnailImage = value;
+                _jump.ThumbnailImage = value.Uri;
                 OnPropertyChanged();
             }
         }
