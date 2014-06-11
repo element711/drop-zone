@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DropZone.Annotations;
+using DropZone.DependencyService;
 using DropZone.Models;
 using DropZone.Repository;
 using DropZone.ViewModels;
@@ -135,6 +136,11 @@ namespace DropZone.Views
 
 
             Button addImage = new Button{Text = "Select Image"};
+            addImage.Clicked += (sender, args) =>
+            {
+                IGalleryImageService galleryService = Xamarin.Forms.DependencyService.Get<IGalleryImageService>();
+                galleryService.SelectImage();
+            };
             grid.Children.Add(addImage, 0, 10);
 
             ScrollView scrollView = new ScrollView
@@ -147,7 +153,6 @@ namespace DropZone.Views
                     }
                 }
             };
-
             Content = scrollView;
         }
 

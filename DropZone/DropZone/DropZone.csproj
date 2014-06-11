@@ -53,6 +53,7 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="App.cs" />
+    <Compile Include="DependencyService\IGalleryImageService.cs" />
     <Compile Include="Models\Aircraft.cs" />
     <Compile Include="Models\IAircraft.cs" />
     <Compile Include="Models\IJump.cs" />
