@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using Android.Content.PM;
 using Android.OS;
 using Xamarin;
 using Xamarin.Forms;
@@ -9,7 +10,10 @@ namespace DropZone.Droid
     /// <summary>
     /// Main activity.
     /// </summary>
-    [Activity(Label = "DropZone", MainLauncher = true, Icon = "@drawable/ParachuteIcon")] // Theme = "@android:style/Theme.Holo.Light"
+    [Activity(Label = "Drop Zone", 
+              MainLauncher = true, 
+              ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, 
+              Icon = "@drawable/ParachuteIcon")]
     public class MainActivity : AndroidActivity
     {
         /// <summary>
