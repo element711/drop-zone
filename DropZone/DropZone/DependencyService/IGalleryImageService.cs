@@ -10,6 +10,11 @@ namespace DropZone.DependencyService
         /// <summary>
         /// Selects the image from the gallery.
         /// </summary>
-        Uri SelectImage();
+        void SelectImage();
+
+        /// <summary>
+        /// Occurs when an image is selected by the user.
+        /// </summary>
+        event EventHandler<ImageSourceEventArgs> ImageSelected;
     }
 }

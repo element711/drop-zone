@@ -51,6 +51,7 @@ namespace DropZone.Views
                     new RowDefinition(),
                     new RowDefinition(),
                     new RowDefinition(),
+                    new RowDefinition(),
                     new RowDefinition()
                 },
                 ColumnDefinitions = new ColumnDefinitionCollection
@@ -133,15 +134,22 @@ namespace DropZone.Views
             };
             description.SetBinding(Entry.TextProperty, "Description");
             grid.Children.Add(description, 0, 9);
-            
-            Button addImage = new Button{Text = "Select Image"};
+
+            Button addImage = new Button{ Text = "Select Image" };
+
+            Image image = new Image();
+
             addImage.Clicked += (sender, args) =>
             {
                 IGalleryImageService galleryService = Xamarin.Forms.DependencyService.Get<IGalleryImageService>();
+                galleryService.ImageSelected += (o, imageSourceEventArgs) => image.Source = imageSourceEventArgs.ImageSource;
                 galleryService.SelectImage();
             };
+
             grid.Children.Add(addImage, 0, 10);
 
+            grid.Children.Add(image, 0, 11);
+            
             ScrollView scrollView = new ScrollView
             {
                 Content = new StackLayout

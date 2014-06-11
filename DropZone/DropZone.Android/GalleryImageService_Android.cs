@@ -1,4 +1,5 @@
 using System;
+using Android.App;
 using Android.Content;
 using DropZone.DependencyService;
 using DropZone.Droid;
@@ -13,19 +14,39 @@ namespace DropZone.Droid
     public class GalleryImageService_Android : Java.Lang.Object, IGalleryImageService
     {
         /// <summary>
+        /// Occurs when an image is selected by the user.
+        /// </summary>
+        public event EventHandler<ImageSourceEventArgs> ImageSelected;
+
+        /// <summary>
         /// Selects the image.
         /// </summary>
-        public Uri SelectImage()
+        public void SelectImage()
         {
-            Context androidContext = Forms.Context;
+            MainActivity androidContext = (MainActivity)Forms.Context;
 
             Intent imageIntent = new Intent();
             imageIntent.SetType("image/*");
             imageIntent.SetAction(Intent.ActionGetContent);
             
-            androidContext.StartActivity(Intent.CreateChooser(imageIntent, "Select photo"));
+            androidContext.ConfigureActivityResultCallback(ImageChooserCallback);
+            androidContext.StartActivityForResult(Intent.CreateChooser(imageIntent, "Select photo"), 0);           
+        }
 
-            return null;
+        private void ImageChooserCallback(int requestCode, Result resultCode, Intent data)
+        {
+            if (resultCode == Result.Ok)
+            {
+                if (ImageSelected != null)
+                {
+                    Android.Net.Uri uri = data.Data;
+                    if (ImageSelected != null)
+                    {
+                        ImageSource imageSource = ImageSource.FromStream(() => Forms.Context.ContentResolver.OpenInputStream(uri));
+                        ImageSelected.Invoke(this, new ImageSourceEventArgs(imageSource));
+                    }
+                }
+            }
         }
     }
 }
