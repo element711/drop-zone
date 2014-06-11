@@ -50,7 +50,7 @@ namespace DropZone.Views
                     new RowDefinition(),
                     new RowDefinition(),
                     new RowDefinition(),
-                    new RowDefinition{ Height = 300 },
+                    new RowDefinition(),
                     new RowDefinition()
                 },
                 ColumnDefinitions = new ColumnDefinitionCollection
@@ -125,16 +125,15 @@ namespace DropZone.Views
             container.SetBinding(Entry.TextProperty, "Container");
             grid.Children.Add(container, 0, 8);
 
-            Editor description = new Editor
+            Entry description = new Entry
             {
+                Placeholder = "Description",
                 HorizontalOptions = LayoutOptions.Fill,
                 VerticalOptions = LayoutOptions.FillAndExpand,
             };
-            // TODO: Binding to editor does not seem to work ?
-            description.SetBinding(Editor.TextProperty, "Description");
+            description.SetBinding(Entry.TextProperty, "Description");
             grid.Children.Add(description, 0, 9);
-
-
+            
             Button addImage = new Button{Text = "Select Image"};
             addImage.Clicked += (sender, args) =>
             {
