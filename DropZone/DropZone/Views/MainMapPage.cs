@@ -69,7 +69,7 @@ namespace DropZone.Views
         {
             // TODO: Get current coordinates -> use that as centre position, not on Auckland
             Position centerPosition = new Position(-36.848461, 174.762183);
-            Distance radius = Distance.FromKilometers(100);
+            Distance radius = Distance.FromKilometers(200);
 
             _map = new Map(MapSpan.FromCenterAndRadius(centerPosition, radius))
             {
