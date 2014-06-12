@@ -74,13 +74,13 @@ namespace MobileServices.Controllers
             CloudBlobClient blobClient = new CloudBlobClient(blobEndpoint, 
                 new StorageCredentials(storageAccountName, storageAccountKey));
 
-            if (item.containerName != null)
+            if (item.ContainerName != null)
             {
                 // Set the BLOB store container name on the item, which must be lowercase.
-                item.containerName = item.containerName.ToLower();
+                item.ContainerName = item.ContainerName.ToLower();
 
                 // Create a container, if it doesn't already exist.
-                CloudBlobContainer container = blobClient.GetContainerReference(item.containerName);
+                CloudBlobContainer container = blobClient.GetContainerReference(item.ContainerName);
                 await container.CreateIfNotExistsAsync();
 
                 // Create a shared access permission policy. 
@@ -99,11 +99,11 @@ namespace MobileServices.Controllers
                 };
 
                 // Get the SAS as a string.
-                item.sasQueryString = container.GetSharedAccessSignature(sasPolicy); 
+                item.SasQueryString = container.GetSharedAccessSignature(sasPolicy); 
 
                 // Set the URL used to store the image.
-                item.imageUri = string.Format("{0}{1}/{2}", blobEndpoint.ToString(), 
-                    item.containerName, item.resourceName);
+                item.ImageUri = string.Format("{0}{1}/{2}", blobEndpoint.ToString(), 
+                    item.ContainerName, item.ResourceName);
             }
 
             // Complete the insert operation.

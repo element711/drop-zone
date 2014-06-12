@@ -1,4 +1,5 @@
 ﻿using Microsoft.WindowsAzure.Mobile.Service;
+using Newtonsoft.Json;
 
 namespace MobileServices.DataObjects
 {
@@ -26,25 +27,25 @@ namespace MobileServices.DataObjects
         /// <summary>
         /// Gets or sets the name of the container.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "container")]
-        public string containerName { get; set; }
+        [JsonProperty(PropertyName = "containerName")]
+        public string ContainerName { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the resource.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "resource")]
-        public string resourceName { get; set; }
+        [JsonProperty(PropertyName = "resourceName")]
+        public string ResourceName { get; set; }
 
         /// <summary>
         /// Gets or sets the sas query string.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "sas"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "sas")]
-        public string sasQueryString { get; set; }
+        [JsonProperty(PropertyName = "sasQueryString")]
+        public string SasQueryString { get; set; }
 
         /// <summary>
         /// Gets or sets the image URI.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "image"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings")]
-        public string imageUri { get; set; } 
+        [JsonProperty(PropertyName = "imageUri")]
+        public string ImageUri { get; set; } 
     }
 }
