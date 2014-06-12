@@ -21,6 +21,24 @@ namespace DropZone.Views
             {
                 Children.Add(page);
             }
+
+            Appearing += OnAppearing;
+            Disappearing += OnDisappearing;
+        }
+
+        private void OnAppearing(object sender, EventArgs e)
+        {
+            ToolbarItems.Add(new ToolbarItem("Add Jump", string.Empty, AddJump));
+        }
+
+        private void AddJump()
+        {
+            Navigation.PushAsync(App.CreateJumpPage());
+        }
+
+        private void OnDisappearing(object sender, EventArgs e)
+        {
+            ToolbarItems.Clear();            
         }
     }
 }

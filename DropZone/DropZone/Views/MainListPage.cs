@@ -61,15 +61,7 @@ namespace DropZone.Views
 
         private void ConfigureToolbar()
         {
-            ToolbarItems.Clear();
-            ToolbarItems.Add(new ToolbarItem("Add Jump", string.Empty, AddJump));
             Title = "Jump List";
-        }
-
-        private void AddJump()
-        {
-            ToolbarItems.Clear();
-            Navigation.PushAsync(App.CreateJumpPage());
         }
     }
 }

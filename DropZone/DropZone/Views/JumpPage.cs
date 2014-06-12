@@ -24,9 +24,28 @@ namespace DropZone.Views
             if (viewModel == null) throw new ArgumentNullException("viewModel");
             if (repository == null) throw new ArgumentNullException("repository");
 
-            ConfigureToolbar(viewModel);
+            ConfigureToolbar();
             ConfigureContent(viewModel, repository);
             ConfigureViewModel(viewModel);
+
+            Appearing += OnAppearing;
+            Disappearing += OnDisappearing;
+        }
+
+        private void OnAppearing(object sender, EventArgs e)
+        {
+            ToolbarItems.Add(new ToolbarItem("Save", string.Empty, Save));
+        }
+
+        private async void Save()
+        {
+            await ((JumpViewModel)BindingContext).Save();
+            await Navigation.PopAsync();
+        }
+
+        private void OnDisappearing(object sender, EventArgs e)
+        {
+            ToolbarItems.Clear();
         }
 
         private void ConfigureViewModel(JumpViewModel viewModel)
@@ -218,19 +237,9 @@ namespace DropZone.Views
             return jumpTypePicker;
         }
 
-        private void ConfigureToolbar(JumpViewModel viewModel)
+        private void ConfigureToolbar()
         {
             Title = "Add Jump";
-            Action save = async () => await Save(viewModel);
-            ToolbarItems.Clear();
-            ToolbarItems.Add(new ToolbarItem("Save", string.Empty, save));
-        }
-
-        private async Task Save(JumpViewModel viewModel)
-        {
-            await viewModel.Save();
-            ToolbarItems.Clear();
-            await Navigation.PopAsync();
         }
     }
 }
