@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using DropZone.Annotations;
@@ -221,19 +222,9 @@ namespace DropZone.ViewModels
         /// <summary>
         /// Gets or sets the image.
         /// </summary>
-        [NotNull]
-        public UriImageSource ThumbnailImage
+        public ImageSource ThumbnailImage
         {
-            get
-            {
-                return new UriImageSource { Uri = _jump.ThumbnailImage, CachingEnabled = true, CacheValidity = TimeSpan.FromMinutes(10) };
-            }
-            set
-            {
-                if (value == null) throw new ArgumentNullException("value");
-                _jump.ThumbnailImage = value.Uri;
-                OnPropertyChanged();
-            }
+            get { return ImageSource.FromStream(() => new MemoryStream(_jump.ThumbnailImage)); }
         }
 
         /// <summary>
@@ -252,6 +243,21 @@ namespace DropZone.ViewModels
         public async Task Save()
         {
             await _repository.Save(_jump);
+        }
+
+        /// <summary>
+        /// Updates the selected image.
+        /// </summary>
+        public void UpdateImage([NotNull] Stream image)
+        {
+            if (image == null) throw new ArgumentNullException("image");
+            
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.CopyTo(ms);
+                _jump.ThumbnailImage = ms.ToArray();
+            }
+            OnPropertyChanged("ThumbnailImage");
         }
     }
 }

@@ -42,8 +42,7 @@ namespace DropZone.Droid
                     Android.Net.Uri uri = data.Data;
                     if (ImageSelected != null)
                     {
-                        ImageSource imageSource = ImageSource.FromStream(() => Forms.Context.ContentResolver.OpenInputStream(uri));
-                        ImageSelected.Invoke(this, new ImageSourceEventArgs(imageSource));
+                        ImageSelected.Invoke(this, new ImageSourceEventArgs(Forms.Context.ContentResolver.OpenInputStream(uri)));
                     }
                 }
             }

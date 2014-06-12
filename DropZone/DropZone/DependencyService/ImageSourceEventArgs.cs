@@ -1,6 +1,6 @@
 ﻿using System;
+using System.IO;
 using DropZone.Annotations;
-using Xamarin.Forms;
 
 namespace DropZone.DependencyService
 {
@@ -12,16 +12,16 @@ namespace DropZone.DependencyService
         /// <summary>
         /// Initializes a new instance of the <see cref="ImageSourceEventArgs"/> class.
         /// </summary>
-        public ImageSourceEventArgs([NotNull] ImageSource imageSource)
+        public ImageSourceEventArgs([NotNull] Stream image)
         {
-            if (imageSource == null) throw new ArgumentNullException("imageSource");
+            if (image == null) throw new ArgumentNullException("image");
 
-            ImageSource = imageSource;
+            Image = image;
         }
 
         /// <summary>
         /// The image source.
         /// </summary>
-        public ImageSource ImageSource { get; private set; }
+        public Stream Image { get; private set; }
     }
 }

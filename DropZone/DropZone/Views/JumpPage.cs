@@ -16,6 +16,8 @@ namespace DropZone.Views
     /// </summary>
     public class JumpPage : ContentPage
     {
+        private readonly IGalleryImageService _galleryService;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="JumpPage"/> class.
         /// </summary>
@@ -27,7 +29,8 @@ namespace DropZone.Views
             ConfigureToolbar();
             ConfigureContent(viewModel, repository);
             ConfigureViewModel(viewModel);
-
+            _galleryService = Xamarin.Forms.DependencyService.Get<IGalleryImageService>();
+            
             Appearing += OnAppearing;
             Disappearing += OnDisappearing;
         }
@@ -45,6 +48,7 @@ namespace DropZone.Views
 
         private void OnDisappearing(object sender, EventArgs e)
         {
+            _galleryService.ImageSelected -= OnImageSelected;
             ToolbarItems.Clear();
         }
 
@@ -157,12 +161,12 @@ namespace DropZone.Views
             Button addImage = new Button{ Text = "Select Image" };
 
             Image image = new Image();
+            image.SetBinding(Image.SourceProperty, "ThumbnailImage");
 
             addImage.Clicked += (sender, args) =>
             {
-                IGalleryImageService galleryService = Xamarin.Forms.DependencyService.Get<IGalleryImageService>();
-                galleryService.ImageSelected += (o, imageSourceEventArgs) => image.Source = imageSourceEventArgs.ImageSource;
-                galleryService.SelectImage();
+                _galleryService.ImageSelected += OnImageSelected;
+                _galleryService.SelectImage();
             };
 
             grid.Children.Add(addImage, 0, 10);
@@ -240,6 +244,11 @@ namespace DropZone.Views
         private void ConfigureToolbar()
         {
             Title = "Add Jump";
+        }
+
+        private void OnImageSelected(object sender, ImageSourceEventArgs e)
+        {
+            ((JumpViewModel)BindingContext).UpdateImage(e.Image);
         }
     }
 }

@@ -60,6 +60,6 @@ namespace DropZone.Models
         /// <summary>
         /// Gets the thumbnail image.
         /// </summary>
-        Uri ThumbnailImage { get; set; }
+        byte[] ThumbnailImage { get; set; }
     }
 }

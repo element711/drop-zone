@@ -18,7 +18,7 @@ namespace DropZone.Models
         private int _totalTime;
         private string _container;
         private string _description;
-        private Uri _thumbnailImage;
+        private byte[] _thumbnailImage;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Jump"/> class.
@@ -35,6 +35,7 @@ namespace DropZone.Models
             _totalTime = 0;
             _container = string.Empty;
             _description = string.Empty;
+            _thumbnailImage = new byte[0];
         }
 
         /// <summary>
@@ -42,7 +43,7 @@ namespace DropZone.Models
         /// </summary>
         public Jump([NotNull] string jumpNumber, DateTime jumpDate, [NotNull] string location, [NotNull] IAircraft aircraft, int altitude,
             [NotNull] IJumpType jumpType, int freefallDelay, int totalTime, [NotNull] string container,
-            [NotNull] string description, [NotNull] Uri thumbnailImage)
+            [NotNull] string description, [NotNull] byte[] thumbnailImage)
         {
             if (jumpNumber == null) throw new ArgumentNullException("jumpNumber");
             if (location == null) throw new ArgumentNullException("location");
@@ -182,7 +183,7 @@ namespace DropZone.Models
         /// <summary>
         /// Gets the thumbnail image.
         /// </summary>
-        public Uri ThumbnailImage
+        public byte[] ThumbnailImage
         {
             get { return _thumbnailImage; }
             set
