@@ -44,7 +44,6 @@ namespace DropZone.ViewModels
         public async Task OnLoad([NotNull] INavigation navigation)
         {
             if (navigation == null) throw new ArgumentNullException("navigation");
-
             _navigation = navigation;
             await UpdateJumps();
         }

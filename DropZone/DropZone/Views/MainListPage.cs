@@ -19,7 +19,7 @@ namespace DropZone.Views
 
             ConfigureViewModel(viewModel);
             ConfigureContent(viewModel);
-            Appearing += (sender, args) => ConfigureToolbar(); // TODO: on android the toolbar has no buttons after adding a jump?
+            ConfigureToolbar();
         }
 
         private void ConfigureViewModel(MainPageViewModel viewModel)
