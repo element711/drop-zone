@@ -14,7 +14,7 @@ namespace DropZone.ViewModels
     /// <summary>
     /// The main page view model.
     /// </summary>
-    public class MainPageViewModel : INotifyPropertyChanged
+    public class MainPageViewModel : INotifyPropertyChanged, IRefreshableViewModel
     {
         private readonly IRepository _repository;
         private IEnumerable<JumpViewModel> _allJumps;
@@ -46,6 +46,11 @@ namespace DropZone.ViewModels
             if (navigation == null) throw new ArgumentNullException("navigation");
 
             _navigation = navigation;
+            await UpdateJumps();
+        }
+
+        private async Task UpdateJumps()
+        {
             IEnumerable<IJump> jumps = await _repository.LoadAllJumps();
             List<JumpViewModel> jumpViewModels = new List<JumpViewModel>();
             foreach (IJump jump in jumps)
@@ -122,6 +127,14 @@ namespace DropZone.ViewModels
                 return;
             }
             Jumps = _allJumps.Where(jump => jump.JumpNumber.ToLower().Contains(search.ToLower())).ToList();
+        }
+
+        /// <summary>
+        /// Refreshes the data.
+        /// </summary>
+        public async Task Refresh()
+        {
+            await UpdateJumps();
         }
     }
 }

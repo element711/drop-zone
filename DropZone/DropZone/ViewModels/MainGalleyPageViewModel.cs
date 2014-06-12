@@ -13,7 +13,7 @@ namespace DropZone.ViewModels
     /// <summary>
     /// The main gallery page view model.
     /// </summary>
-    public class MainGalleyPageViewModel : INotifyPropertyChanged
+    public class MainGalleyPageViewModel : INotifyPropertyChanged, IRefreshableViewModel
     {
         private readonly IRepository _repository;
         private IEnumerable<JumpViewModel> _leftJumps;
@@ -113,7 +113,6 @@ namespace DropZone.ViewModels
                 _rightJumps = value;
                 OnPropertyChanged();
             }
-
         }
 
         /// <summary>
@@ -124,6 +123,14 @@ namespace DropZone.ViewModels
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// <summary>
+        /// Refreshes the data.
+        /// </summary>
+        public async Task Refresh()
+        {
+            await OnLoad();
         }
     }
 }

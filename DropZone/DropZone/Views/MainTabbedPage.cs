@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 using DropZone.Annotations;
+using DropZone.ViewModels;
 using Xamarin.Forms;
 
 namespace DropZone.Views
@@ -26,9 +28,22 @@ namespace DropZone.Views
             Disappearing += OnDisappearing;
         }
 
-        private void OnAppearing(object sender, EventArgs e)
+        private async void OnAppearing(object sender, EventArgs e)
         {
             ToolbarItems.Add(new ToolbarItem("Add Jump", string.Empty, AddJump));
+            await RefreshTabs();
+        }
+
+        private async Task RefreshTabs()
+        {
+            foreach (Page page in Children)
+            {
+                IRefreshableViewModel viewModel = page.BindingContext as IRefreshableViewModel;
+                if (viewModel != null)
+                {
+                    await viewModel.Refresh();
+                }
+            }
         }
 
         private void AddJump()
