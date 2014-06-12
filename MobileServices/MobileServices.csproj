@@ -214,8 +214,8 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\TodoItemController.cs" />
-    <Compile Include="DataObjects\TodoItem.cs" />
+    <Compile Include="Controllers\JumpItemController.cs" />
+    <Compile Include="DataObjects\JumpItem.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Models\MobileServicesContext.cs" />
     <Compile Include="ScheduledJobs\SampleJob.cs" />

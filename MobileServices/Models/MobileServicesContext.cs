@@ -37,7 +37,7 @@ namespace MobileServices.Models
         /// <summary>
         /// Gets or sets the to-do items.
         /// </summary>
-        public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<JumpItem> JumpItems { get; set; }
 
         /// <summary>
         /// This method is called when the model for a derived context has been initialized, but

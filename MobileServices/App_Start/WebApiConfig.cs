@@ -41,18 +41,18 @@ namespace MobileServices
         /// <summary>
         /// Seeds the specified context.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "MobileServices.DataObjects.TodoItem.set_Text(System.String)")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "MobileServices.DataObjects.JumpItem.set_Text(System.String)")]
         protected override void Seed(MobileServicesContext context)
         {
-            List<TodoItem> todoItems = new List<TodoItem>
+            List<JumpItem> jumpItems = new List<JumpItem>
             {
-                new TodoItem { Id = "1", Text = "First item", Complete = false },
-                new TodoItem { Id = "2", Text = "Second item", Complete = false },
+//                new JumpItem { Id = "1", Text = "First item", Complete = false },
+//                new JumpItem { Id = "2", Text = "Second item", Complete = false },
             };
 
-            foreach (TodoItem todoItem in todoItems)
+            foreach (JumpItem jumpItem in jumpItems)
             {
-                context.Set<TodoItem>().Add(todoItem);
+                context.Set<JumpItem>().Add(jumpItem);
             }
 
             base.Seed(context);
