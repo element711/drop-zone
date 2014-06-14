@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using DropZone.Annotations;
 using DropZone.DependencyService;
 using DropZone.Models;
@@ -37,7 +36,7 @@ namespace DropZone.Views
 
         private void OnAppearing(object sender, EventArgs e)
         {
-            ToolbarItems.Add(new ToolbarItem("Save", string.Empty, Save));
+            ToolbarItems.Add(new ToolbarItem("Insert", string.Empty, Save));
         }
 
         private async void Save()
@@ -57,7 +56,7 @@ namespace DropZone.Views
             BindingContext = viewModel;            
         }
 
-        private async void ConfigureContent(JumpViewModel viewModel, IRepository repository)
+        private void ConfigureContent(JumpViewModel viewModel, IRepository repository)
         {
             Grid grid = new Grid
             {
@@ -104,7 +103,7 @@ namespace DropZone.Views
             location.SetBinding(Entry.TextProperty, "Location");
             grid.Children.Add(location, 0, 2);
             
-            Picker aircraftPicker = await CreateAircraftPicker(viewModel, repository);
+            Picker aircraftPicker = CreateAircraftPicker(viewModel, repository);
             grid.Children.Add(aircraftPicker, 0, 3);
 
             Entry altitude = new Entry
@@ -117,7 +116,7 @@ namespace DropZone.Views
             altitude.SetBinding(Entry.TextProperty, "Altitude");
             grid.Children.Add(altitude, 0, 4);
 
-            Picker jumpTypePicker = await CreateJumpTypePicker(viewModel, repository);
+            Picker jumpTypePicker = CreateJumpTypePicker(viewModel, repository);
             grid.Children.Add(jumpTypePicker, 0, 5);
 
             Entry freefallDelay = new Entry
@@ -188,7 +187,7 @@ namespace DropZone.Views
 
         // TODO: Change this to bind to view model. The Picker class is not yet bindable. 8/6/2014
         // http://forums.xamarin.com/discussion/17875/binding-to-picker-items
-        private static async Task<Picker> CreateAircraftPicker(JumpViewModel viewModel, IRepository repository)
+        private static Picker CreateAircraftPicker(JumpViewModel viewModel, IRepository repository)
         {
             Picker aircraftPicker = new Picker
             {
@@ -196,15 +195,13 @@ namespace DropZone.Views
                 Title = "Aircraft",
             };
 
-            IList<IAircraft> allAircraft = (await repository.LoadAllAircraft()).ToList();
-            allAircraft.Add(new UnknownAircraft());
+            IEnumerable<IAircraft> allAircraft = repository.LoadAllAircraft();
 
             foreach (IAircraft aircraft in allAircraft)
             {
                 aircraftPicker.Items.Add(aircraft.Name);
             }
-
-
+            
             aircraftPicker.SelectedIndex = aircraftPicker.Items.IndexOf(viewModel.Aircraft.Name);
             aircraftPicker.SelectedIndexChanged += (sender, args) =>
             {
@@ -216,7 +213,7 @@ namespace DropZone.Views
 
         // TODO: Change this to bind to view model. The Picker class is not yet bindable. 9/6/2014
         // http://forums.xamarin.com/discussion/17875/binding-to-picker-items
-        private static async Task<Picker> CreateJumpTypePicker(JumpViewModel viewModel, IRepository repository)
+        private static Picker CreateJumpTypePicker(JumpViewModel viewModel, IRepository repository)
         {
             Picker jumpTypePicker = new Picker
             {
@@ -224,8 +221,7 @@ namespace DropZone.Views
                 Title = "Jump Type",
             };
 
-            List<IJumpType> allJumpTypes = (await repository.LoadAllJumpTypes()).ToList();
-            allJumpTypes.Add(new UnknownJumpType());
+            IEnumerable<IJumpType> allJumpTypes = repository.LoadAllJumpTypes();
 
             foreach (IJumpType jumpType in allJumpTypes)
             {

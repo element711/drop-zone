@@ -10,11 +10,11 @@ namespace DropZone
     /// </summary>
     public class App
     {
-        private static FakeRepository _repository;
+        private static IRepository _repository;
 
-        private static FakeRepository Repository
+        private static IRepository Repository
         {
-            get { return _repository ?? (_repository = new FakeRepository()); }
+            get { return _repository ?? (_repository = new Repository.JumpRepository()); }
         }
 
         /// <summary>

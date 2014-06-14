@@ -21,16 +21,16 @@ namespace DropZone.Models
         private byte[] _thumbnailImage;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Jump"/> class.
+        /// Initializes a new instance of the <see cref="Jump" /> class.
         /// </summary>
         public Jump()
         {
             _jumpDate = DateTime.Now;
             _jumpNumber = string.Empty;
             _location = string.Empty;
-            _aircraft = new UnknownAircraft();
+            _aircraft = new Aircraft("Other");
             _altitude = 0;
-            _jumpType = new UnknownJumpType();
+            _jumpType = new JumpType("Other");
             _freefallDelay = 0;
             _totalTime = 0;
             _container = string.Empty;

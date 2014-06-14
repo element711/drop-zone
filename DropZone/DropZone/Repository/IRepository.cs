@@ -22,11 +22,11 @@ namespace DropZone.Repository
         /// <summary>
         /// Loads all jump types.
         /// </summary>
-        Task<IEnumerable<IJumpType>> LoadAllJumpTypes();
+        IEnumerable<IJumpType> LoadAllJumpTypes();
 
         /// <summary>
         /// Loads a list of aircraft.
         /// </summary>
-        Task<IEnumerable<IAircraft>> LoadAllAircraft();
+        IEnumerable<IAircraft> LoadAllAircraft();
     }
 }
