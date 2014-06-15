@@ -11,8 +11,17 @@ namespace DropZone.iOS
     /// </summary>
     public class GalleryImageService_iOS : IGalleryImageService
     {
-        public event EventHandler<ImageSourceEventArgs> ImageSelected;
 
+#pragma warning disable 0067
+        /// <summary>
+        /// Occurs when an image is selected by the user.
+        /// </summary>
+        public event EventHandler<ImageSourceEventArgs> ImageSelected;
+#pragma warning restore 0067
+
+        /// <summary>
+        /// Selects the image from the gallery.
+        /// </summary>
         public void SelectImage()
         {
             // TODO: Implement gallery selection on iOS

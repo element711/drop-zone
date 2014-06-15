@@ -23,7 +23,7 @@
 	<key>MinimumOSVersion</key>
 	<string>6.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>DropZone</string>
+	<string>Drop Zone</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.nzchrisp.DropZone</string>
 	<key>CFBundleVersion</key>
