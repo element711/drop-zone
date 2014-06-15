@@ -30,7 +30,8 @@ namespace DropZone.Views
 
         private async void OnAppearing(object sender, EventArgs e)
         {
-            ToolbarItems.Add(new ToolbarItem("Add Jump", "add.png", AddJump));
+            string imageName = Device.OS == TargetPlatform.WinPhone ? "add.png" : string.Empty;
+            ToolbarItems.Add(new ToolbarItem("Add Jump", imageName, AddJump));
             await RefreshTabs();
         }
 
