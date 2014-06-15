@@ -36,7 +36,7 @@ namespace DropZone.Views
 
         private void OnAppearing(object sender, EventArgs e)
         {
-            ToolbarItems.Add(new ToolbarItem("Insert", string.Empty, Save));
+            ToolbarItems.Add(new ToolbarItem("Save", string.Empty, Save));
         }
 
         private async void Save()
