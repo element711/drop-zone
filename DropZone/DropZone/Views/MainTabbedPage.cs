@@ -30,7 +30,7 @@ namespace DropZone.Views
 
         private async void OnAppearing(object sender, EventArgs e)
         {
-            ToolbarItems.Add(new ToolbarItem("Add Jump", string.Empty, AddJump));
+            ToolbarItems.Add(new ToolbarItem("Add Jump", "add.png", AddJump));
             await RefreshTabs();
         }
 
