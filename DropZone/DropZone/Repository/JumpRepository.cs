@@ -44,7 +44,7 @@ namespace DropZone.Repository
             foreach (JumpItem jump in loadedJumps)
             {
                 Aircraft aircraft = _allAircraft.First(craft => craft.Name == jump.Aircraft);
-                IJumpType jumpType = _jumpTypes.First(type => type.Name == jump.Aircraft);
+                IJumpType jumpType = _jumpTypes.First(type => type.Name == jump.JumpType);
 
                 jumps.Add(new Jump(jump.JumpNumber, jump.JumpDate, jump.Location, aircraft, 
                     jump.Altitude, jumpType, jump.FreefallDelay, jump.TotalTime, jump.Container, 

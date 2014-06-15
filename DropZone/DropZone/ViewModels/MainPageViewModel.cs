@@ -65,7 +65,7 @@ namespace DropZone.ViewModels
         /// </summary>
         public IEnumerable<JumpViewModel> Jumps
         {
-            get { return _jumps; }
+            get { return _jumps.OrderBy(jump => jump.JumpNumber); }
             set
             {
                 if (value == null) throw new ArgumentNullException("value");
