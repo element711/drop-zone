@@ -48,7 +48,7 @@ namespace DropZone.Repository
 
                 jumps.Add(new Jump(jump.JumpNumber, jump.JumpDate, jump.Location, aircraft, 
                     jump.Altitude, jumpType, jump.FreefallDelay, jump.TotalTime, jump.Container, 
-                    jump.Description, new byte[0]));
+                    jump.Description, jump.ThumbnailImage));
             }
 
             return jumps;

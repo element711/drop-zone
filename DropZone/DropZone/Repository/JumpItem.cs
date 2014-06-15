@@ -37,6 +37,7 @@ namespace DropZone.Repository
             JumpType = jump.JumpType.Name;
             Location = jump.Location;
             TotalTime = jump.TotalTime;
+            ThumbnailImage = jump.ThumbnailImage;
         }
 
         /// <summary>
@@ -99,6 +100,10 @@ namespace DropZone.Repository
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
-//        public byte[] ThumbnailImage { get; set; }
+        /// <summary>
+        /// Gets or sets the thumbnail image.
+        /// </summary>
+        [JsonProperty(PropertyName = "thumbnailImage")]        
+        public byte[] ThumbnailImage { get; set; }
     }
 }
