@@ -110,9 +110,29 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <XamarinComponentReference Include="azure-mobile-services">
+      <Visible>False</Visible>
+      <Version>1.2.1</Version>
+    </XamarinComponentReference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.WindowsAzure.Mobile">
+      <HintPath>..\..\Components\azure-mobile-services-1.2.1\lib\ios\Microsoft.WindowsAzure.Mobile.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Mobile.Ext">
+      <HintPath>..\..\Components\azure-mobile-services-1.2.1\lib\ios\Microsoft.WindowsAzure.Mobile.Ext.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Components\azure-mobile-services-1.2.1\lib\ios\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\..\Components\azure-mobile-services-1.2.1\lib\ios\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\..\Components\azure-mobile-services-1.2.1\lib\ios\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
