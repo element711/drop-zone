@@ -24,6 +24,7 @@ namespace DropZone.Views
         {
             if (repository == null) throw new ArgumentNullException("repository");
 
+            Icon = "map.png";
             ConfigureMapPins(repository);
             ConfigureContent();
             ConfigureToolbar();

@@ -17,6 +17,7 @@ namespace DropZone.Views
         {
             if (viewModel == null) throw new ArgumentNullException("viewModel");
 
+            Icon = "list.png";
             ConfigureViewModel(viewModel);
             ConfigureContent(viewModel);
             ConfigureToolbar();
