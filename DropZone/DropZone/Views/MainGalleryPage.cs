@@ -20,6 +20,7 @@ namespace DropZone.Views
             Title = "Gallery";
             ConfigureViewModel(viewModel);
             ConfigureContent();
+            Icon = "gallery.png";
         }
 
         private void ConfigureViewModel(MainGalleyPageViewModel viewModel)

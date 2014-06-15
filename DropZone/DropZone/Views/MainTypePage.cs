@@ -19,7 +19,8 @@ namespace DropZone.Views
 
             ConfigureViewModel(viewModel);
             ConfigureContent(viewModel);
-            ConfigureToolbar(); 
+            ConfigureToolbar();
+            Icon = "groupedlist.png";
         }
 
         private void ConfigureViewModel(MainPageViewModel viewModel)
