@@ -225,9 +225,9 @@ Global
 		{BD22F5C4-79C5-47EF-80CD-5AA4A14080CB}.Release|ARM.Deploy.0 = Release|ARM
 		{BD22F5C4-79C5-47EF-80CD-5AA4A14080CB}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{BD22F5C4-79C5-47EF-80CD-5AA4A14080CB}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{BD22F5C4-79C5-47EF-80CD-5AA4A14080CB}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{BD22F5C4-79C5-47EF-80CD-5AA4A14080CB}.Release|Mixed Platforms.Build.0 = Release|x86
-		{BD22F5C4-79C5-47EF-80CD-5AA4A14080CB}.Release|Mixed Platforms.Deploy.0 = Release|x86
+		{BD22F5C4-79C5-47EF-80CD-5AA4A14080CB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BD22F5C4-79C5-47EF-80CD-5AA4A14080CB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BD22F5C4-79C5-47EF-80CD-5AA4A14080CB}.Release|Mixed Platforms.Deploy.0 = Release|Any CPU
 		{BD22F5C4-79C5-47EF-80CD-5AA4A14080CB}.Release|x86.ActiveCfg = Release|x86
 		{BD22F5C4-79C5-47EF-80CD-5AA4A14080CB}.Release|x86.Build.0 = Release|x86
 		{BD22F5C4-79C5-47EF-80CD-5AA4A14080CB}.Release|x86.Deploy.0 = Release|x86
