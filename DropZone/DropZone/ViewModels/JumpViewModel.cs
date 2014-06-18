@@ -224,7 +224,14 @@ namespace DropZone.ViewModels
         /// </summary>
         public ImageSource ThumbnailImage
         {
-            get { return ImageSource.FromStream(() => new MemoryStream(_jump.ThumbnailImage)); }
+            get
+            {
+                if (_jump.ThumbnailImage.Length > 0)
+                {
+                    return ImageSource.FromStream(() => new MemoryStream(_jump.ThumbnailImage));                    
+                }
+                return null;
+            }
         }
 
         /// <summary>
