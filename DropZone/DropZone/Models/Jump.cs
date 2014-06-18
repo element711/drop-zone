@@ -19,6 +19,7 @@ namespace DropZone.Models
         private string _container;
         private string _description;
         private byte[] _thumbnailImage;
+        private readonly string _id;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Jump" /> class.
@@ -41,7 +42,7 @@ namespace DropZone.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Jump"/> class.
         /// </summary>
-        public Jump([NotNull] string jumpNumber, DateTime jumpDate, [NotNull] string location, [NotNull] IAircraft aircraft, int altitude,
+        public Jump(string id, [NotNull] string jumpNumber, DateTime jumpDate, [NotNull] string location, [NotNull] IAircraft aircraft, int altitude,
             [NotNull] IJumpType jumpType, int freefallDelay, int totalTime, [NotNull] string container,
             [NotNull] string description, [NotNull] byte[] thumbnailImage)
         {
@@ -53,6 +54,7 @@ namespace DropZone.Models
             if (description == null) throw new ArgumentNullException("description");
             if (thumbnailImage == null) throw new ArgumentNullException("thumbnailImage");
 
+            _id = id;
             _jumpNumber = jumpNumber;
             _jumpDate = jumpDate;
             _location = location;
@@ -65,6 +67,11 @@ namespace DropZone.Models
             _description = description;
             _thumbnailImage = thumbnailImage;
         }
+
+        /// <summary>
+        /// Gets the identifier.
+        /// </summary>
+        public string Id { get { return _id; } }
 
         /// <summary>
         /// Gets the jump number.

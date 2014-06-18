@@ -61,5 +61,10 @@ namespace DropZone.Models
         /// Gets the thumbnail image.
         /// </summary>
         byte[] ThumbnailImage { get; set; }
+
+        /// <summary>
+        /// Gets the identifier.
+        /// </summary>
+        string Id { get ;}
     }
 }

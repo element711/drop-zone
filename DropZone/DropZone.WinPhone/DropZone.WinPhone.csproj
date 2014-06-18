@@ -103,7 +103,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AzureMobileService_WinPhone.cs" />
+    <Compile Include="AzureJumpMobileServiceClient_WinPhone.cs" />
     <Compile Include="GalleryImageService_WinPhone.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LocalizedStrings.cs" />

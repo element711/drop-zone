@@ -27,6 +27,7 @@ namespace DropZone.Repository
         {
             if (jump == null) throw new ArgumentNullException("jump");
 
+            Id = jump.Id;
             Aircraft = jump.Aircraft.Name;
             Altitude = jump.Altitude;
             Container = jump.Container;
@@ -104,6 +105,6 @@ namespace DropZone.Repository
         /// Gets or sets the thumbnail image.
         /// </summary>
         [JsonProperty(PropertyName = "thumbnailImage")]        
-        public byte[] ThumbnailImage { get; set; }
+        public byte[] ThumbnailImage { get; set; } // TODO: Use blob storage for this
     }
 }

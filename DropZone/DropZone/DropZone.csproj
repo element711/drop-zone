@@ -53,8 +53,10 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="App.cs" />
+    <Compile Include="DependencyService\IAzureJumpMobileServiceClient.cs" />
+    <Compile Include="Repository\AzureJumpMobileService.cs" />
+    <Compile Include="Repository\AzureMobileServicesResult.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="DependencyService\IAzureMobileService.cs" />
     <Compile Include="DependencyService\IGalleryImageService.cs" />
     <Compile Include="DependencyService\ImageSourceEventArgs.cs" />
     <Compile Include="Models\Aircraft.cs" />

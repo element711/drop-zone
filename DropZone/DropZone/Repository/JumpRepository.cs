@@ -11,9 +11,9 @@ namespace DropZone.Repository
     /// </summary>
     public class JumpRepository : IRepository
     {
-        private readonly IAzureMobileService _mobileService;
         private static Aircraft[] _allAircraft;
         private static IEnumerable<IJumpType> _jumpTypes;
+        private readonly AzureJumpMobileService _mobileService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JumpRepository"/> class.
@@ -22,7 +22,8 @@ namespace DropZone.Repository
         {
             _allAircraft = CreateAircraft();
             _jumpTypes = CreateJumpTypes();
-            _mobileService = Xamarin.Forms.DependencyService.Get<IAzureMobileService>();
+            // TODO: pass in dependency service.
+            _mobileService = new AzureJumpMobileService(Xamarin.Forms.DependencyService.Get<IAzureJumpMobileServiceClient>());
         }
 
         /// <summary>
@@ -30,7 +31,7 @@ namespace DropZone.Repository
         /// </summary>
         public async Task Save(IJump jump)
         {
-            await _mobileService.Insert(new JumpItem(jump)); // TODO: Handle update.
+            await _mobileService.Save(new JumpItem(jump));
         }
 
         /// <summary>
@@ -38,7 +39,7 @@ namespace DropZone.Repository
         /// </summary>
         public async Task<IEnumerable<IJump>> LoadAllJumps()
         {
-            IList<JumpItem> loadedJumps = await _mobileService.LoadAllJumps();
+            IEnumerable<JumpItem> loadedJumps = await _mobileService.LoadAllJumps();
             IList<IJump> jumps = new List<IJump>();
 
             foreach (JumpItem jump in loadedJumps)
@@ -46,7 +47,7 @@ namespace DropZone.Repository
                 Aircraft aircraft = _allAircraft.First(craft => craft.Name == jump.Aircraft);
                 IJumpType jumpType = _jumpTypes.First(type => type.Name == jump.JumpType);
 
-                jumps.Add(new Jump(jump.JumpNumber, jump.JumpDate, jump.Location, aircraft, 
+                jumps.Add(new Jump(jump.Id, jump.JumpNumber, jump.JumpDate, jump.Location, aircraft, 
                     jump.Altitude, jumpType, jump.FreefallDelay, jump.TotalTime, jump.Container, 
                     jump.Description, jump.ThumbnailImage));
             }

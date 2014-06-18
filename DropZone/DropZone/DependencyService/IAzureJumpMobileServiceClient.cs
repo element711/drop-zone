@@ -7,16 +7,21 @@ namespace DropZone.DependencyService
     /// <summary>
     /// Responsible for saving and loading data using Azure mobile services.
     /// </summary>
-    public interface IAzureMobileService
+    public interface IAzureJumpMobileServiceClient
     {
         /// <summary>
-        /// Inserts the specified jump.
+        /// Gets the jump items.
+        /// </summary>
+        Task<IEnumerable<JumpItem>> GetItems();
+
+        /// <summary>
+        /// Inserts the specified jump item.
         /// </summary>
         Task Insert(JumpItem jump);
 
         /// <summary>
-        /// Loads all jumps.
+        /// Updates the specified jump item.
         /// </summary>
-        Task<IList<JumpItem>> LoadAllJumps();
+        Task Update(JumpItem jump);
     }
 }
