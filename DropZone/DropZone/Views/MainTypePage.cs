@@ -8,7 +8,7 @@ namespace DropZone.Views
     /// <summary>
     /// List of all jumps grouped by jump type.
     /// </summary>
-    public class MainTypePage : ContentPage
+    public class MainTypePage : XForms.Toolkit.Mvvm.BaseView
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MainTypePage"/> class.

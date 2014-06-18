@@ -9,7 +9,7 @@ namespace DropZone.Views
     /// <summary>
     /// The tab page for the main page in the application.
     /// </summary>
-    public class MainTabbedPage : TabbedPage
+    public class MainTabbedPage : XForms.Toolkit.Controls.ExtendedTabbedPage
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MainTabbedPage"/> class.

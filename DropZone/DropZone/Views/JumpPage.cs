@@ -13,7 +13,7 @@ namespace DropZone.Views
     /// <summary>
     /// Represents a jump page.
     /// </summary>
-    public class JumpPage : ContentPage
+    public class JumpPage : XForms.Toolkit.Mvvm.BaseView
     {
         private readonly IGalleryImageService _galleryService;
 

@@ -8,7 +8,7 @@ namespace DropZone.Views
     /// <summary>
     /// The gallery page on the main page.
     /// </summary>
-    public class MainGalleryPage : ContentPage
+    public class MainGalleryPage : XForms.Toolkit.Mvvm.BaseView
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MainGalleryPage"/> class.

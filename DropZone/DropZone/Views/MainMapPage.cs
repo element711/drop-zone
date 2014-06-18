@@ -4,7 +4,6 @@ using System.Linq;
 using DropZone.Annotations;
 using DropZone.Models;
 using DropZone.Repository;
-using DropZone.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
@@ -13,7 +12,7 @@ namespace DropZone.Views
     /// <summary>
     /// Map page showing the locations of all of your jumps.
     /// </summary>
-    public class MainMapPage : ContentPage
+    public class MainMapPage : XForms.Toolkit.Mvvm.BaseView
     {
         private Map _map;
 
