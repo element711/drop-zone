@@ -53,6 +53,7 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="App.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="DependencyService\IAzureMobileService.cs" />
     <Compile Include="DependencyService\IGalleryImageService.cs" />
     <Compile Include="DependencyService\ImageSourceEventArgs.cs" />

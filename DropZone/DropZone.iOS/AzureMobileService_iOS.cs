@@ -40,11 +40,10 @@ namespace DropZone.iOS
 
         private IMobileServiceTable<JumpItem> RetrieveJumpTable()
         {
-            const string applicationUrl = @"http://dropzoneapp.azure-mobile.net/"; // TODO: pull this out to constants file
-            const string applicationKey = @"bsMvKUXhqtbSmLwpAZoBYxrpWmOxgB15";
-			
             CurrentPlatform.Init();
-            MobileServiceClient client = new MobileServiceClient(applicationUrl, applicationKey, this);
+            MobileServiceClient client = new MobileServiceClient(Settings.MobileServicesApplicationUrl, 
+                                                                 Settings.MobileServicesApplicationKey, 
+                                                                 this);
             return client.GetTable<JumpItem>();
         }
 

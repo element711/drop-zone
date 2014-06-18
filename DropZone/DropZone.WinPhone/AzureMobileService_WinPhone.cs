@@ -40,10 +40,8 @@ namespace DropZone.WinPhone
 
         private static IMobileServiceTable<JumpItem> RetrieveJumpTable()
         {
-            const string applicationUrl = @"http://dropzoneapp.azure-mobile.net/";
-            const string applicationKey = @"bsMvKUXhqtbSmLwpAZoBYxrpWmOxgB15";
-			
-            MobileServiceClient client = new MobileServiceClient(applicationUrl, applicationKey);
+            MobileServiceClient client = new MobileServiceClient(Settings.MobileServicesApplicationUrl, 
+                                                                 Settings.MobileServicesApplicationKey);
             return client.GetTable<JumpItem>();
         }
     }
