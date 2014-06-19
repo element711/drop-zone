@@ -185,56 +185,45 @@ namespace DropZone.Views
             Content = scrollView;
         }
 
-        // TODO: Change this to bind to view model. The Picker class is not yet bindable. 8/6/2014
-        // http://forums.xamarin.com/discussion/17875/binding-to-picker-items
         private static Picker CreateAircraftPicker(JumpViewModel viewModel, IRepository repository)
         {
-            Picker aircraftPicker = new Picker
-            {
-                VerticalOptions = LayoutOptions.CenterAndExpand,
-                Title = "Aircraft",
-            };
-
             IEnumerable<IAircraft> allAircraft = repository.LoadAllAircraft();
-
-            foreach (IAircraft aircraft in allAircraft)
+            Action<string> selectedIndexChangedAction = s =>
             {
-                aircraftPicker.Items.Add(aircraft.Name);
-            }
-            
-            aircraftPicker.SelectedIndex = aircraftPicker.Items.IndexOf(viewModel.Aircraft.Name);
-            aircraftPicker.SelectedIndexChanged += (sender, args) =>
-            {
-                viewModel.Aircraft = allAircraft.First(aircraft => aircraft.Name ==
-                                allAircraft.ElementAt(aircraftPicker.SelectedIndex).Name);
+                viewModel.Aircraft = allAircraft.First(aircraft => aircraft.Name.Equals(s));
             };
-            return aircraftPicker;
+            return CreatePicker("Aircraft", viewModel.Aircraft.Name, selectedIndexChangedAction, allAircraft.Select(aircraft => aircraft.Name));
+        }
+
+        private static Picker CreateJumpTypePicker(JumpViewModel viewModel, IRepository repository)
+        {
+            IEnumerable<IJumpType> allJumpTypes = repository.LoadAllJumpTypes();
+            Action<string> selectedIndexChangedAction = s =>
+            {
+                viewModel.JumpType = allJumpTypes.First(aircraft => aircraft.Name.Equals(s));
+            };
+            return CreatePicker("Jump Type", viewModel.JumpType.Name, selectedIndexChangedAction, allJumpTypes.Select(aircraft => aircraft.Name));
         }
 
         // TODO: Change this to bind to view model. The Picker class is not yet bindable. 9/6/2014
         // http://forums.xamarin.com/discussion/17875/binding-to-picker-items
-        private static Picker CreateJumpTypePicker(JumpViewModel viewModel, IRepository repository)
+        private static Picker CreatePicker(string title, string selectedItem, Action<string> selectedIndexChangedAction, IEnumerable<string> items)
         {
-            Picker jumpTypePicker = new Picker
+            Picker picker = new Picker
             {
-                VerticalOptions = LayoutOptions.CenterAndExpand,
-                Title = "Jump Type",
+                Title = title, 
+                VerticalOptions = LayoutOptions.Center
             };
-
-            IEnumerable<IJumpType> allJumpTypes = repository.LoadAllJumpTypes();
-
-            foreach (IJumpType jumpType in allJumpTypes)
+            foreach (string item in items)
             {
-                jumpTypePicker.Items.Add(jumpType.Name);
+                picker.Items.Add(item);
+                if (item == selectedItem)
+                {
+                    picker.SelectedIndex = picker.Items.Count;
+                }
             }
-            
-            jumpTypePicker.SelectedIndex = jumpTypePicker.Items.IndexOf(viewModel.JumpType.Name);
-            jumpTypePicker.SelectedIndexChanged += (sender, args) =>
-            {
-                viewModel.JumpType = allJumpTypes.First(jumpType => jumpType.Name ==
-                                allJumpTypes.ElementAt(jumpTypePicker.SelectedIndex).Name);
-            };
-            return jumpTypePicker;
+            picker.SelectedIndexChanged += (sender, args) => selectedIndexChangedAction.Invoke(picker.Items[picker.SelectedIndex]);
+            return picker;
         }
 
         private void ConfigureToolbar()

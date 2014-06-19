@@ -29,9 +29,9 @@ namespace DropZone.Models
             _jumpDate = DateTime.Now;
             _jumpNumber = string.Empty;
             _location = string.Empty;
-            _aircraft = new Aircraft("Other");
+            _aircraft = new Aircraft(string.Empty);
             _altitude = 0;
-            _jumpType = new JumpType("Other");
+            _jumpType = new JumpType(string.Empty);
             _freefallDelay = 0;
             _totalTime = 0;
             _container = string.Empty;
