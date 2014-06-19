@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using DropZone.Annotations;
 using DropZone.Models;
 using DropZone.Repository;
@@ -45,12 +45,9 @@ namespace DropZone.Views
 
         private async void PopulateMapWith(IEnumerable<IJump> jumps)
         {
-            Geocoder geocoder = new Geocoder();
-            
             foreach (IJump jump in jumps)
             {
-                IEnumerable<Position> positions = await geocoder.GetPositionsForAddressAsync(jump.Location);
-                positions = positions.ToList();
+                IEnumerable<Position> positions = await TryLoadPositionsFor(jump);
                 foreach (Position position in positions)
                 {
                     _map.Pins.Add(new Pin
@@ -62,6 +59,18 @@ namespace DropZone.Views
                     });
                 }
             }
+        }
+
+        private static async Task<IEnumerable<Position>> TryLoadPositionsFor(IJump jump)
+        {
+            try
+            {
+                Geocoder geocoder = new Geocoder();
+                return await geocoder.GetPositionsForAddressAsync(jump.Location);
+            }
+            catch (Exception) { }
+
+            return new List<Position>();
         }
 
 
