@@ -4,6 +4,7 @@ using Android.Content;
 using DropZone.DependencyService;
 using DropZone.Droid;
 using Xamarin.Forms;
+using Xamarin.Media;
 
 [assembly: Dependency(typeof(GalleryImageService_Android))]
 namespace DropZone.Droid
@@ -25,26 +26,26 @@ namespace DropZone.Droid
         {
             MainActivity androidContext = (MainActivity)Forms.Context;
 
-            Intent imageIntent = new Intent();
-            imageIntent.SetType("image/*");
-            imageIntent.SetAction(Intent.ActionGetContent);
-            
+            MediaPicker mediaPicker = new MediaPicker(androidContext);
+            Intent pickPhotoIntent = mediaPicker.GetPickPhotoUI();
             androidContext.ConfigureActivityResultCallback(ImageChooserCallback);
-            androidContext.StartActivityForResult(Intent.CreateChooser(imageIntent, "Select photo"), 0);           
+            androidContext.StartActivityForResult(Intent.CreateChooser(pickPhotoIntent, "Select Photo"), 0);           
         }
 
-        private void ImageChooserCallback(int requestCode, Result resultCode, Intent data)
+        private async void ImageChooserCallback(int requestCode, Result resultCode, Intent data)
         {
             if (resultCode == Result.Ok)
             {
-                if (ImageSelected != null)
-                {
-                    Android.Net.Uri uri = data.Data;
-                    if (ImageSelected != null)
-                    {
-                        ImageSelected.Invoke(this, new ImageSourceEventArgs(Forms.Context.ContentResolver.OpenInputStream(uri)));
-                    }
-                }
+                MediaFile file = await data.GetMediaFileExtraAsync(Forms.Context);
+                OnImageSelected(file);
+            }
+        }
+
+        private void OnImageSelected(MediaFile file)
+        {
+            if (ImageSelected != null)
+            {
+                ImageSelected.Invoke(this, new ImageSourceEventArgs(file.GetStream()));
             }
         }
     }
