@@ -15,6 +15,7 @@ namespace DropZone.Views
     /// </summary>
     public class JumpPage : XForms.Toolkit.Mvvm.BaseView
     {
+        private readonly JumpViewModel _viewModel;
         private readonly IGalleryImageService _galleryService;
 
         /// <summary>
@@ -25,24 +26,24 @@ namespace DropZone.Views
             if (viewModel == null) throw new ArgumentNullException("viewModel");
             if (repository == null) throw new ArgumentNullException("repository");
 
+            _viewModel = viewModel;
             ConfigureToolbar();
-            ConfigureContent(viewModel, repository);
-            ConfigureViewModel(viewModel);
+            ConfigureContent(repository);
+            ConfigureViewModel();
             _galleryService = Xamarin.Forms.DependencyService.Get<IGalleryImageService>();
             
             Appearing += OnAppearing;
             Disappearing += OnDisappearing;
         }
 
+        private void ConfigureToolbar()
+        {
+            Title = "Add Jump";
+        }
+
         private void OnAppearing(object sender, EventArgs e)
         {
             ToolbarItems.Add(new ToolbarItem("Save", string.Empty, Save));
-        }
-
-        private async void Save()
-        {
-            await ((JumpViewModel)BindingContext).Save();
-            await Navigation.PopAsync();
         }
 
         private void OnDisappearing(object sender, EventArgs e)
@@ -51,12 +52,17 @@ namespace DropZone.Views
             ToolbarItems.Clear();
         }
 
-        private void ConfigureViewModel(JumpViewModel viewModel)
+        private async void Save()
         {
-            BindingContext = viewModel;            
+            await _viewModel.Save();
         }
 
-        private void ConfigureContent(JumpViewModel viewModel, IRepository repository)
+        private void ConfigureViewModel()
+        {
+            BindingContext = _viewModel;            
+        }
+
+        private void ConfigureContent(IRepository repository)
         {
             Grid grid = new Grid
             {
@@ -103,7 +109,7 @@ namespace DropZone.Views
             location.SetBinding(Entry.TextProperty, "Location");
             grid.Children.Add(location, 0, 2);
             
-            Picker aircraftPicker = CreateAircraftPicker(viewModel, repository);
+            Picker aircraftPicker = CreateAircraftPicker(repository);
             grid.Children.Add(aircraftPicker, 0, 3);
 
             Entry altitude = new Entry
@@ -116,7 +122,7 @@ namespace DropZone.Views
             altitude.SetBinding(Entry.TextProperty, "Altitude");
             grid.Children.Add(altitude, 0, 4);
 
-            Picker jumpTypePicker = CreateJumpTypePicker(viewModel, repository);
+            Picker jumpTypePicker = CreateJumpTypePicker(repository);
             grid.Children.Add(jumpTypePicker, 0, 5);
 
             Entry freefallDelay = new Entry
@@ -157,19 +163,11 @@ namespace DropZone.Views
             description.SetBinding(Entry.TextProperty, "Description");
             grid.Children.Add(description, 0, 9);
 
-            Button addImage = new Button{ Text = "Select Image" };
-
-            Image image = new Image();
-            image.SetBinding(Image.SourceProperty, "ThumbnailImage");
-
-            addImage.Clicked += (sender, args) =>
-            {
-                _galleryService.ImageSelected += OnImageSelected;
-                _galleryService.SelectImage();
-            };
-
+            Button addImage = CreateAddImageButton();
             grid.Children.Add(addImage, 0, 10);
 
+            Image image = new Image();
+            image.SetBinding(Image.SourceProperty, "ThumbnailImage");          
             grid.Children.Add(image, 0, 11);
             
             ScrollView scrollView = new ScrollView
@@ -185,24 +183,41 @@ namespace DropZone.Views
             Content = scrollView;
         }
 
-        private static Picker CreateAircraftPicker(JumpViewModel viewModel, IRepository repository)
+        private Button CreateAddImageButton()
+        {
+            Button addImage = new Button {Text = "Select Image"};
+
+            addImage.Clicked += (sender, args) =>
+            {
+                _galleryService.ImageSelected += OnImageSelected;
+                _galleryService.SelectImage();
+            };
+            return addImage;
+        }
+
+        private void OnImageSelected(object sender, ImageSourceEventArgs e)
+        {
+            _viewModel.UpdateImage(e.Image);
+        }
+
+        private Picker CreateAircraftPicker(IRepository repository)
         {
             IEnumerable<IAircraft> allAircraft = repository.LoadAllAircraft();
             Action<string> selectedIndexChangedAction = s =>
             {
-                viewModel.Aircraft = allAircraft.First(aircraft => aircraft.Name.Equals(s));
+                _viewModel.Aircraft = allAircraft.First(aircraft => aircraft.Name.Equals(s));
             };
-            return CreatePicker("Aircraft", viewModel.Aircraft.Name, selectedIndexChangedAction, allAircraft.Select(aircraft => aircraft.Name));
+            return CreatePicker("Aircraft", _viewModel.Aircraft.Name, selectedIndexChangedAction, allAircraft.Select(aircraft => aircraft.Name));
         }
 
-        private static Picker CreateJumpTypePicker(JumpViewModel viewModel, IRepository repository)
+        private Picker CreateJumpTypePicker(IRepository repository)
         {
             IEnumerable<IJumpType> allJumpTypes = repository.LoadAllJumpTypes();
             Action<string> selectedIndexChangedAction = s =>
             {
-                viewModel.JumpType = allJumpTypes.First(aircraft => aircraft.Name.Equals(s));
+                _viewModel.JumpType = allJumpTypes.First(aircraft => aircraft.Name.Equals(s));
             };
-            return CreatePicker("Jump Type", viewModel.JumpType.Name, selectedIndexChangedAction, allJumpTypes.Select(aircraft => aircraft.Name));
+            return CreatePicker("Jump Type", _viewModel.JumpType.Name, selectedIndexChangedAction, allJumpTypes.Select(aircraft => aircraft.Name));
         }
 
         // TODO: Change this to bind to view model. The Picker class is not yet bindable. 9/6/2014
@@ -224,16 +239,6 @@ namespace DropZone.Views
             }
             picker.SelectedIndexChanged += (sender, args) => selectedIndexChangedAction.Invoke(picker.Items[picker.SelectedIndex]);
             return picker;
-        }
-
-        private void ConfigureToolbar()
-        {
-            Title = "Add Jump";
-        }
-
-        private void OnImageSelected(object sender, ImageSourceEventArgs e)
-        {
-            ((JumpViewModel)BindingContext).UpdateImage(e.Image);
         }
     }
 }

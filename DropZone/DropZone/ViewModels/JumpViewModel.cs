@@ -1,33 +1,27 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Globalization;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using DropZone.Annotations;
 using DropZone.Models;
 using DropZone.Repository;
 using Xamarin.Forms;
+using XForms.Toolkit.Mvvm;
 
 namespace DropZone.ViewModels
 {
     /// <summary>
     /// The jump view model.
     /// </summary>
-    public class JumpViewModel : INotifyPropertyChanged
+    public class JumpViewModel : ViewModel
     {
         private readonly IRepository _repository;
         private readonly IJump _jump;
-
-        /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        private ImageSource _thumbnailImage;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JumpViewModel"/> class.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public JumpViewModel([NotNull] IRepository repository)
         {
             if (repository == null) throw new ArgumentNullException("repository");
@@ -45,6 +39,7 @@ namespace DropZone.ViewModels
             if (repository == null) throw new ArgumentNullException("repository");
 
             _jump = jump;
+            _thumbnailImage = CreateImageSource();
             _repository = repository;
         }
 
@@ -64,7 +59,7 @@ namespace DropZone.ViewModels
                     return;
                 }
                 _jump.JumpNumber = value;
-                OnPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
 
@@ -81,7 +76,7 @@ namespace DropZone.ViewModels
                     return;
                 }
                 _jump.JumpDate = value;
-                OnPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
 
@@ -101,7 +96,7 @@ namespace DropZone.ViewModels
                     return;
                 }
                 _jump.Location = value;
-                OnPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
 
@@ -117,7 +112,7 @@ namespace DropZone.ViewModels
                 if (value == null) throw new ArgumentNullException("value");
 
                 _jump.Aircraft = value;
-                OnPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
 
@@ -130,7 +125,7 @@ namespace DropZone.ViewModels
             set
             {
                 _jump.Altitude = string.IsNullOrEmpty(value) ? 0 : int.Parse(value, CultureInfo.CurrentCulture);
-                OnPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
 
@@ -146,7 +141,7 @@ namespace DropZone.ViewModels
                 if (value == null) throw new ArgumentNullException("value");
 
                 _jump.JumpType = value;
-                OnPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
 
@@ -159,7 +154,7 @@ namespace DropZone.ViewModels
             set
             {
                 _jump.FreefallDelay = string.IsNullOrEmpty(value) ? 0 : int.Parse(value, CultureInfo.CurrentCulture);
-                OnPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
 
@@ -175,7 +170,7 @@ namespace DropZone.ViewModels
             set
             {
                 _jump.TotalTime = string.IsNullOrEmpty(value) ? 0 : int.Parse(value, CultureInfo.CurrentCulture);
-                OnPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
 
@@ -195,7 +190,7 @@ namespace DropZone.ViewModels
                     return;
                 }
                 _jump.Container = value;
-                OnPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
 
@@ -215,7 +210,7 @@ namespace DropZone.ViewModels
                     return;
                 }
                 _jump.Description = value;
-                OnPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
 
@@ -224,24 +219,24 @@ namespace DropZone.ViewModels
         /// </summary>
         public ImageSource ThumbnailImage
         {
-            get
+            get 
             {
-                if (_jump.ThumbnailImage.Length > 0)
-                {
-                    return ImageSource.FromStream(() => new MemoryStream(_jump.ThumbnailImage));                    
-                }
-                return null;
+                return _thumbnailImage;
+            }
+            set
+            {
+                _thumbnailImage = value;
+                NotifyPropertyChanged();
             }
         }
 
-        /// <summary>
-        /// Called when a property is changed.
-        /// </summary>
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private ImageSource CreateImageSource()
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            if (_jump.ThumbnailImage.Length > 0)
+            {
+                return ImageSource.FromStream(() => new MemoryStream(_jump.ThumbnailImage));
+            }
+            return null;
         }
 
         /// <summary>
@@ -250,6 +245,7 @@ namespace DropZone.ViewModels
         public async Task Save()
         {
             await _repository.Save(_jump);
+            await Navigation.PopAsync();
         }
 
         /// <summary>
@@ -258,13 +254,13 @@ namespace DropZone.ViewModels
         public void UpdateImage([NotNull] Stream image)
         {
             if (image == null) throw new ArgumentNullException("image");
-            
+
             using (MemoryStream ms = new MemoryStream())
             {
                 image.CopyTo(ms);
                 _jump.ThumbnailImage = ms.ToArray();
             }
-            OnPropertyChanged("ThumbnailImage");
+            ThumbnailImage = CreateImageSource();
         }
     }
 }
