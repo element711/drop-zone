@@ -1,6 +1,8 @@
 using System;
+using System.IO;
 using DropZone.DependencyService;
 using DropZone.WinPhone;
+using Microsoft.Phone.Tasks;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(GalleryImageService_WinPhone))]
@@ -11,19 +13,33 @@ namespace DropZone.WinPhone
     /// </summary>
     public class GalleryImageService_WinPhone : IGalleryImageService
     {
-#pragma warning disable 0067
         /// <summary>
         /// Occurs when an image is selected by the user.
         /// </summary>
         public event EventHandler<ImageSourceEventArgs> ImageSelected;
-#pragma warning restore 0067
 
         /// <summary>
         /// Selects the image from the gallery.
         /// </summary>
         public void SelectImage()
         {
-            // TODO: Implement gallery selection on WP8
+            PhotoChooserTask photoTask = new PhotoChooserTask { ShowCamera = true };
+            photoTask.Completed += (sender, result) =>
+            {
+                if (result.TaskResult == TaskResult.OK)
+                {
+                    OnImageSelected(result.ChosenPhoto);
+                }
+            };
+            photoTask.Show();
+        }
+
+        private void OnImageSelected(Stream stream)
+        {
+            if (ImageSelected != null)
+            {
+                ImageSelected.Invoke(this, new ImageSourceEventArgs(stream));
+            }
         }
     }
 }
